@@ -1,7 +1,7 @@
 
 // const HOME_URL = 'http://127.0.0.1:5000';
 // const HOME_URL = 'http://127.0.0.1:7900';
-const HOME_URL = 'https://couponsdomain.com';
+const HOME_URL = 'www.couponsdomain.com';
 
 const DATA_INDICATOR = "data";
 const LOGIN_INDICATOR = "login";
