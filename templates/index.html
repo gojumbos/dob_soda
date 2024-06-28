@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body id="the-body">
+    <form>
+    <input type="text" placeholder="Enter Username" name="uname" id="Username" >
+    </form>
+    <script>
+        cap = document.getElementById("Username") ;
+        cap.style.display = 'none';
+        cap.addEventListener("submit",  () =>
+        tempCaptcha(), false
+    );
+    </script>
+    <div class="navbar" id="nb-main">
+        <a href="#home" id="homee">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#entity" id="tracking">Entities</a>
+         <a href="#building" id="building">Buildings</a>
+    </div>
+    <div></div>
+    <div id="success-container"></div>
+    <div id="input-tracking">
+        <h2>Input Entity To Track (type required): </h2>
+        <form onsubmit="submitEntity(event)">
+            <input type="text" id="entity_type" placeholder="Enter Individual/Business" required>
+          <input type="text" id="first_name_et" placeholder="Applicant First Name" >
+          <input type="text" id="last_name_et" placeholder="Applicant Last Name" >
+            <input type="text" id="biz_name_o_et" placeholder="Owner's Business Name" >
+            <input type="text" id="license" placeholder="Applicant License" >
+            <button type="submit">Submit</button>
+        </form>
+        <div id="tracking-form-response"> -- </div>
+{#        <br>#}
+{#        <h2>Input Entity To Delete: </h2>#}
+{#        <h3>(enter only one field)</h3>#}
+{#         <form onsubmit="clickDeleteEntity(event)" id="del-entity">#}
+{#          <input type="text" id="del_col_name" placeholder="Column Name To Lookup Item" >#}
+{#          <input type="text" id="del_content" placeholder="Identifying Cell Data" >#}
+{#            <input type="text" id="del_biz_name_o_et" placeholder="Owner's Business Name" >#}
+{#            <input type="text" id="del_license" placeholder="Applicant License" >#}
+{#            <button type="submit">Submit</button>#}
+{#        </form>#}
+    </div>
+     <div id="building-tracking">
+        <h2>Input Building To Track: </h2>
+        <form onsubmit="submitBuilding(event)">
+            <input type="text" id="bin_no" placeholder="bin number" >
+            <button type="submit">Submit</button>
+        </form>
+        <div id="building-form-response"> -- </div>
+        <br>
+         <h2>Input Building To Delete: </h2>
+         <form onsubmit="clickDeleteBuilding(event)" id="del-building">
+            <input type="text" id="del_bin_no" placeholder="bin number" >
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div id="anchor"></div>
+    <div class="login-form" id="login-formm">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="loginUser(event)">
+          <input type="text" id="user_email" placeholder="Username" required>
+          <input type="password" id="user_password" placeholder="Password" required>
+          <button type="submit">Login</button>
+        </form>
+        <div id="error-container"></div>
+    </div>
+    <div id="low-anchor"></div>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
