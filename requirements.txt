@@ -4,3 +4,4 @@ airium~=0.2.6
 flask~=3.0.2
 requests~=2.31.0
 supabase~=2.4.0
+gunicorn~=22.0.0
