@@ -4,7 +4,7 @@
 // const HOME_URL = 'http://127.0.0.1:5000'
 // const HOME_URL = 'http://127.0.0.1:8000'
 // const HOME_URL = 'https://couponsdomain.com:8000';
-const HOME_URL = 'clownfish-app-8om3z.ondigitalocean.app:8000';
+const HOME_URL = 'clownfish-app-8om3z.ondigitalocean.app';
 
 const DATA_INDICATOR = "data";
 const LOGIN_INDICATOR = "login";
