@@ -28,7 +28,7 @@ class AppController:
     def __init__(self, dev_server=False,
                  supa_wrapper=None):
         self.dev_server = dev_server
-        self.app_object = Flask(__name__)
+        self.app_object = Flask(__name__, static_url_path='/static')
         self.all_users = {}
         self.supa_wrapper = supa_wrapper
 
