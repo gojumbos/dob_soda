@@ -68,6 +68,14 @@ def home():  # put application's code here
     #         return "", 500
     return flask.render_template('index.html')
 
+@app.route('/api', methods=['GET'])
+def home():  # put application's code here
+    # token = request.cookies['cookie1']
+    # if token:
+    #     if app_controller.is_on_no_fly_list(token):
+    #         return "", 500
+    return flask.render_template('index.html')
+
 # soda
 @app.route('/soda_check_update', methods=['POST'])
 def soda_check_update():
@@ -75,7 +83,7 @@ def soda_check_update():
     return
 
 
-@app.route('/delete_item', methods=['POST'])
+@app.route('/api/delete_item', methods=['POST'])
 def delete_item():
     """ given type and id, drop from table """
     data = request.get_json()
@@ -110,7 +118,7 @@ def delete_item():
     return response
 
 
-@app.route('/trying', methods=['POST'])
+@app.route('/api/trying', methods=['POST'])
 def captcha():
     # token = request.cookies['cookie1']
     msg = "", 500
@@ -131,7 +139,7 @@ def test_email():
     return 'done debug'
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
     """ given request with creds from browser,
     attempt supabase login
@@ -168,7 +176,7 @@ def login():
     return response
 
 
-@app.route('/get_user_data', methods=['POST'])
+@app.route('/api/get_user_data', methods=['POST'])
 def get_user_data():
 
     data = request.get_json()
@@ -201,7 +209,7 @@ def get_user_data():
     return response
 
 
-@app.route('/get_user_tracked_entities', methods=['POST'])
+@app.route('/api/get_user_tracked_entities', methods=['POST'])
 def get_user_tracked_entities():
     """ check: assert email? """
 
@@ -226,7 +234,7 @@ def get_user_tracked_entities():
     return response
 
 
-@app.route('/submit_new_entity', methods=['POST'])
+@app.route('/api/submit_new_entity', methods=['POST'])
 def get_new_entity_tracked():
     data = request.get_json()
     token = request.cookies['cookie1']
@@ -264,7 +272,7 @@ def get_new_entity_tracked():
 
 
 # -building
-@app.route('/submit_new_building', methods=['POST'])
+@app.route('/api/submit_new_building', methods=['POST'])
 def get_new_building_tracked():
     data = request.get_json()
     token = request.cookies['cookie1']
@@ -292,7 +300,7 @@ def get_new_building_tracked():
     return response
 
 
-@app.route('/get_user_tracked_buildings', methods=['POST'])
+@app.route('/api/get_user_tracked_buildings', methods=['POST'])
 def get_user_tracked_buildings():
     """ check: assert email? """
 
