@@ -5,8 +5,8 @@ flask~=3.0.2
 requests~=2.31.0
 supabase~=2.4.0
 click==7.1.2
-gunicorn==20.0.4
-itsdangerous==1.1.0
-Jinja2==2.11.3
-MarkupSafe==1.1.1
+gunicorn>=20.0.4
+itsdangerous>=1.1.0
+Jinja2>=2.11.3
+MarkupSafe>=1.1.1
 Werkzeug>=3.0.3
