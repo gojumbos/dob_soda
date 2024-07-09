@@ -69,7 +69,7 @@ def home():  # put application's code here
     return flask.render_template('index.html')
 
 @app.route('/api', methods=['GET'])
-def home():  # put application's code here
+def api_home():  # put application's code here
     # token = request.cookies['cookie1']
     # if token:
     #     if app_controller.is_on_no_fly_list(token):
