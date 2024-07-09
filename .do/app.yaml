@@ -1,0 +1,6 @@
+name: sample-flask
+services:
+- name: web
+  github:
+    repo: gojumbos/sample-flask
+    branch: main
