@@ -13,9 +13,6 @@ from constants import SUPA_JAY_DB_COLS
 
 import em
 
-# async def make_request(url, headers):
-#     r = await requests.get(url, headers=headers)
-
 
 def dob_check_item_last_update(date_pre, date_post, token, logger,
                                subject, col,

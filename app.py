@@ -75,7 +75,18 @@ def home():  # put application's code here
     # if token:
     #     if app_controller.is_on_no_fly_list(token):
     #         return "", 500
-    return flask.render_template('index.html')
+    """"""
+    """ js """
+    js_path = os.path.join(app.static_folder, 'js', 'main.js')
+    with open(js_path, 'r') as js_file:
+        js_content = js_file.read()
+    """ css """
+    css_path = os.path.join(app.static_folder, 'css', 'styles.css')
+    with open(css_path, 'r') as css_file:
+        css_content = css_file.read()
+    return flask.render_template('index.html',
+                                 js_content=js_content,
+                                 css_content=css_content)
 
 @app.route('/api', methods=['GET'])
 def api_home():  # put application's code here

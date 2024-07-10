@@ -1,7 +1,7 @@
 spec:
-  name: sample-flask
+  name: dob-soda
   services:
   - name: web
     git:
-      branch: main
+      branch: explore
       repo_clone_url: https://github.com/gojumbos/dob_soda.git

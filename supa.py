@@ -134,3 +134,32 @@ class SupaClientWrapper:
         except Exception as e:
             app.logger.error(e)
             return "Bad login", 401
+
+
+    def check_user_session(self, access_token=None, app=None,):
+        """ check if user session is active
+         >> reload data
+         """
+
+        try:
+            res = self.sb_client.auth.get_session()
+            data = res.data
+
+            return data, 200
+
+        except Exception as e:
+            app.logger.error(e)
+            return "Bad login", 401
+
+
+    def log_out(self, access_token=None, app=None,):
+
+        try:
+            res = self.sb_client.auth.sign_out()
+            data = res.data
+
+            return data, 200
+
+        except Exception as e:
+            app.logger.error(e)
+            return "Bad login", 401
