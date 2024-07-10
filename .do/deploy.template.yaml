@@ -3,5 +3,5 @@ spec:
   services:
   - name: web
     git:
-      branch: explore
+      branch: main
       repo_clone_url: https://github.com/gojumbos/dob_soda.git
