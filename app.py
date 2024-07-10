@@ -29,8 +29,6 @@ class AppController:
                  supa_wrapper=None):
         self.dev_server = dev_server
         self.app_object = Flask(__name__,  # 7/9
-                                static_url_path='',
-                                static_folder='/static',
                                 )
         self.all_users = {}
         self.supa_wrapper = supa_wrapper
@@ -62,6 +60,14 @@ sw = supa.SupaClientWrapper()
 app_controller = AppController(supa_wrapper=sw)
 app = app_controller.app_object
 
+
+# @app.route('/stat', methods=['GET'])
+# def home():  # put application's code here
+#     # token = request.cookies['cookie1']
+#     # if token:
+#     #     if app_controller.is_on_no_fly_list(token):
+#     #         return "", 500
+#     return flask.render_template('index.html')
 
 @app.route('/', methods=['GET'])
 def home():  # put application's code here

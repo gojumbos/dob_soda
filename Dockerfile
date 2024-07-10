@@ -1,27 +1,30 @@
-# Use an official Python runtime as a parent image
+# Base image for Python
 FROM python:3.9-slim
 
-# Set the working directory in the container
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Create and set working directory
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
-COPY . /app
-
-
-# Install any needed packages specified in requirements.txt
+# Install dependencies
+COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 80 available to the world outside this container
-EXPOSE 7900
-EXPOSE 80
-#ENV PORT 9000
+# Copy Flask app code
+COPY . /app
 
-#ENV FLASK_APP app.py
+# Install Nginx
+RUN apt-get update && \
+    apt-get install -y nginx && \
+    rm -rf /var/lib/apt/lists/*
 
-# Run flask app when the container launches
-# FLASK REQUIREMENT
-#CMD ["flask", "run", "--host=0.0.0.0"]
-#CMD ["python3", "app.py"]
-CMD ["flask", "run", "--host=0.0.0.0", "--port=7900"]
+# Copy Nginx configuration file
+COPY nginx.conf /etc/nginx/nginx.conf
 
+# Expose the port
+EXPOSE 8000
 
+# Start Nginx and Gunicorn
+CMD service nginx start && gunicorn --workers 3 --bind 0.0.0.0:8000 app:app

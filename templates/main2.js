@@ -1,172 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-{#    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">#}
-{#    <link rel="stylesheet" href="/css/styles.css">#}
-    <style>
-        body {
-            font-family: "Trebuchet MS", sans-serif;
-        }
-.navbar {
-    overflow: hidden;
-    background-color: #333;
-}
-.navbar a {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-.navbar a:hover {
-    background-color: #ddd;
-    color: black;
-}
-.login-form {
-    /*display: none;*/
-    margin: 20px;
-}
-
-.login-form input[type="text"], .login-form input[type="password"] {
-    width: 20%;
-    padding: 10px;
-    margin: 5px 0;
-    display: inline;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-.login-form button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 18px;
-    margin: 10px 0;
-    border: none;
-    cursor: pointer;
-    width: 20%;
-
-}
-
-.neutral-message {
-    color: black;
-}
-
-.error-message {
-    color: red;
-    font-family: "Trebuchet MS", sans-serif;
-
-}
-
-.success-message {
-    font-family: "Trebuchet MS", sans-serif;
-    color: darkslategray;
-    font-size: smaller;
-}
-
-.btn {
-    font-family: "Trebuchet MS", sans-serif;
-    padding: 10px 5px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    padding-left: 5px;
-}
-th, td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-}
-th {
-    background-color: #f2f2f2;
-}
-    </style>
-</head>
-<body id="the-body">
-    <form>
-    <input type="text" placeholder="Enter Username" name="uname" id="Username" >
-    </form>
-    <script>
-        cap = document.getElementById("Username") ;
-        cap.style.display = 'none';
-        cap.addEventListener("submit",  () =>
-        tempCaptcha(), false
-    );
-    </script>
-{#    <script >#}
-{#      fetch(HOME_URL + '/trying', {#}
-{#    method: 'GET',#}
-{#    headers: {#}
-{#      'Content-Type': 'application/json'#}
-{#    },#}
-{#    body: "trying"#}
-{#        }).then()#}
-{#    </script>#}
-    <div class="navbar" id="nb-main">
-        <a href="#home" id="homee">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a href="#entity" id="tracking">Entities</a>
-         <a href="#building" id="building">Buildings</a>
-    </div>
-    <div></div>
-    <div id="success-container"></div>
-    <div id="input-tracking">
-        <h2>Input Entity To Track (type required): </h2>
-        <form onsubmit="submitEntity(event)">
-            <input type="text" id="entity_type" placeholder="Enter Individual/Business" required>
-          <input type="text" id="first_name_et" placeholder="Applicant First Name" >
-          <input type="text" id="last_name_et" placeholder="Applicant Last Name" >
-            <input type="text" id="biz_name_o_et" placeholder="Owner's Business Name" >
-            <input type="text" id="license" placeholder="Applicant License" >
-            <button type="submit">Submit</button>
-        </form>
-        <div id="tracking-form-response"> -- </div>
-{#        <br>#}
-{#        <h2>Input Entity To Delete: </h2>#}
-{#        <h3>(enter only one field)</h3>#}
-{#         <form onsubmit="clickDeleteEntity(event)" id="del-entity">#}
-{#          <input type="text" id="del_col_name" placeholder="Column Name To Lookup Item" >#}
-{#          <input type="text" id="del_content" placeholder="Identifying Cell Data" >#}
-{#            <input type="text" id="del_biz_name_o_et" placeholder="Owner's Business Name" >#}
-{#            <input type="text" id="del_license" placeholder="Applicant License" >#}
-{#            <button type="submit">Submit</button>#}
-{#        </form>#}
-    </div>
-     <div id="building-tracking">
-        <h2>Input Building To Track: </h2>
-        <form onsubmit="submitBuilding(event)">
-            <input type="text" id="bin_no" placeholder="bin number" >
-            <button type="submit">Submit</button>
-        </form>
-        <div id="building-form-response"> -- </div>
-        <br>
-         <h2>Input Building To Delete: </h2>
-         <form onsubmit="clickDeleteBuilding(event)" id="del-building">
-            <input type="text" id="del_bin_no" placeholder="bin number" >
-            <button type="submit">Submit</button>
-        </form>
-    </div>
-    <div id="anchor"></div>
-    <div class="login-form" id="login-formm">
-        <h2>Login</h2>
-        <form id="loginForm" onsubmit="loginUser(event)">
-          <input type="text" id="user_email" placeholder="Username" required>
-          <input type="password" id="user_password" placeholder="Password" required>
-          <button type="submit">Login</button>
-        </form>
-        <div id="error-container"></div>
-    </div>
-    <div id="low-anchor"></div>
-{#<script src="{{ url_for('static', filename='js/main.js') }}"></script>#}
-{#<script src="/js/main.js"></script>#}
-<script>
 
 // const HOME_URL = 'http://127.0.0.1:5000';
 // const HOME_URL = 'http://127.0.0.1:7900';
@@ -891,6 +722,25 @@ async function getTrackedBuildings(event) {
 
 }
 
-</script>
-</body>
-</html>
+// document.addEventListener('DOMContentLoaded', function() {
+//     const tracking = document.getElementById('tracking');
+//     const navbarMenu = document.getElementById('nb-main');
+//
+//     tracking.addEventListener('click', function() {
+//         navbarMenu.classList.toggle('active');
+//     });
+//
+//     // Identify the special link
+//     const specialLink = document.getElementById('special-link');
+//
+//     // Define the function to be called
+//     function specialFunction(event) {
+//         event.preventDefault(); // Prevent the default link behavior
+//         alert('Special link clicked!');
+//         // Add your custom functionality here
+//     }
+//
+//     // Add an event listener to the special link
+//     specialLink.addEventListener('click', specialFunction);
+// });
+
