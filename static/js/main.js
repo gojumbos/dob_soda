@@ -1,7 +1,7 @@
 
-const HOME_URL = 'http://127.0.0.1:8000/api'
+// const HOME_URL = 'http://127.0.0.1:8000/api'
 // const HOME_URL = 'https://clownfish-app-8om3z.ondigitalocean.app/api:8000'
-// const HOME_URL = 'https://clownfish-app-8om3z.ondigitalocean.app/dob-soda2/api'
+const HOME_URL = 'https://clownfish-app-8om3z.ondigitalocean.app/dob-soda2/api'
 // const HOME_URL = 'https://couponsdomain.com:8000';
 
 const DATA_INDICATOR = "data";
@@ -86,7 +86,6 @@ function hideEntityInputField() {
         tfr.display.textContent = "--";
         tfr.className = "neutral-message";
     } catch (e) {console.log(e) }
-
 }
 
 function showEntityInputField() {
@@ -405,9 +404,12 @@ function hideEntitiesTable() {
     } catch (e) {
         console.log(e)
     }
-
 }
 
+async function fetchSodaUpdate() {
+    // fetch yesterdays data soda dob
+
+}
 
 async function clickHome() {
     // issue ?
@@ -415,11 +417,14 @@ async function clickHome() {
     if (data_container.userEmail == null) {
         console.log("undeff")
         showLoginForm();
+        // show fetch button
+
+
     } else {
         // issue ?
         hideEntitiesTable();
         hideBuildingsTable();  // 7/9
-        await homePageAndDataFetch()
+        await homePageAndDataFetch();
         //
     }
     hideEntityInputField();

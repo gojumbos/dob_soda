@@ -3,11 +3,9 @@
 import os
 from typing import List
 
-import requests
 from supabase import create_client, Client
 from dotenv import load_dotenv
 
-import time
 
 
 class SupaClientWrapper:

@@ -43,7 +43,6 @@ def dob_get_new_data(date_pre, date_post, token, logger):
     with open(f'{str(f_date_post)}.json', 'w') as f:
         json.dump(r.json(), f)
 
-
     # with open('all_data_job_app.csv', newline='') as csvfile:
     #     wrt = csv.writer(csvfile, delimiter=' ', quotechar='|')
     #     for row in wrt:
