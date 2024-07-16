@@ -111,7 +111,7 @@ def soda_check_update():
     basic pass phrase check, non-security viable
     7-16-24
     """
-    data = request.get_json()
+    # data = request.get_json()
     phrase = request.headers.get('Authorization')
     if phrase != 'icecream999':
         return jsonify({'message': 'Request failed'}), 400
