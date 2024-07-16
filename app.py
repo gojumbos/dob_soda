@@ -105,15 +105,15 @@ def api_home():  # put application's code here
 
 
 # soda
-@app.route('/api/soda_get_update', methods=['POST'])
+@app.route('/api/soda_get_update', methods=['GET'])
 def soda_check_update():
     """ api endpoint for cron job
     basic pass phrase check, non-security viable
     """
-    data = request.get_json()
-    phrase = data.get('passphrase')
-    if phrase != 'icecream':
-        return jsonify({'message': 'Request failed'}), 400
+    # data = request.get_json()
+    # phrase = data.get('passphrase')
+    # if phrase != 'icecream':
+    #     return jsonify({'message': 'Request failed'}), 400
     return cron.cron_run()
     # """ **** FINISH
 
