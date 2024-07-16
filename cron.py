@@ -16,10 +16,11 @@ import supa
 import constants
 
 
-def dob_get_new_data(date_pre, date_post, token, logger,
+def dob_get_new_data(date_pre, date_post, token, logger=None,
                      cols=None):
 
     """ Job application filings """
+    """ returns a list of dicts """
 
     # url = 'https://data.cityofnewyork.us/resource/w9ak-ipjd.json' + f'$$app_token={token}'
     # soql = '?$select=street_name,house_no&$where=permit_issue_date>\'2024-06-01T00:00:00.000\''
@@ -27,11 +28,12 @@ def dob_get_new_data(date_pre, date_post, token, logger,
     f_date_pre = date_pre.strftime("%Y-%m-%d")    # earlier
     f_date_post = date_post.strftime("%Y-%m-%d")  # later
 
-    default_cols = constants.DEFAULT_SODA_COLS if cols is None else cols
+    default_cols_str = constants.DEFAULT_SODA_COLS if cols is None else cols
 
-    soql1 = f'?$select={default_cols}&'
+    soql1 = f'?$select={default_cols_str}&'
+    # """ current_status_date - filing date """
     # soql2 = '$where=permit_issue_date between \'2024-06-10T00:00:00.000\' and \'2024-06-12T00:00:00.000\''  # date
-    soql2 = f'$where=filing_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
+    soql2 = f'$where=current_status_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
 
     file_type = 'json'  # json
     url = f'https://data.cityofnewyork.us/resource/w9ak-ipjd.{file_type}' + soql1 + soql2
@@ -41,10 +43,16 @@ def dob_get_new_data(date_pre, date_post, token, logger,
     # r = asyncio.run(requests.get(url, headers=headers))
     r = requests.get(url, headers=headers)
 
+    """ insert nulls """
+    res = r.json()  # list of dicts
+    col_list = default_cols_str.split(',')
+    for d in col_list:
+        for item in res:
+            if d not in item:
+                item[d] = "NULL"
+
     print(r.status_code)
     print(r.headers['content-type'], r.encoding)
-    # print(r.text)
-    # print(r.json())
     with open(f'{str(f_date_post)}.json', 'w') as f:
         json.dump(r.json(), f)
 
@@ -53,7 +61,7 @@ def dob_get_new_data(date_pre, date_post, token, logger,
     #     for row in wrt:
     #         print(', '.join(row))
 
-    return r.json()
+    return res
 
 
 def cron_run():
@@ -76,7 +84,8 @@ def cron_run():
     token = constants.SODA_TOKEN
     data_dict = dob_get_new_data(date_pre=prev_day,
                                 date_post=today,
-                                token=token)
+                                token=token,
+                                 )
 
 
     cols = "bin,owner_s_business_name,house_no,street_name,borough,filing_date,filing_status"

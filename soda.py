@@ -25,7 +25,8 @@ def dob_get_update(date_pre, date_post, token,
     soql1 = ('?$select=street_name,house_no,borough,filing_status,job_filing_number,filing_date,' +
              'applicant_first_name,applicant_last_name, owner_s_business_name,filing_representative_business_name&')
     # soql2 = '$where=permit_issue_date between \'2024-06-10T00:00:00.000\' and \'2024-06-12T00:00:00.000\''  # date
-    soql2 = f'$where=filing_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
+    # soql2 = f'$where=filing_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
+    soql2 = f'$where=current_status_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
 
     file_type = 'json'  # json
     url = f'https://data.cityofnewyork.us/resource/w9ak-ipjd.{file_type}' + soql1 + soql2

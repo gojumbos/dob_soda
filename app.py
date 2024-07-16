@@ -109,12 +109,14 @@ def api_home():  # put application's code here
 def soda_check_update():
     """ api endpoint for cron job
     basic pass phrase check, non-security viable
+    7-16-24
     """
-    # data = request.get_json()
-    # phrase = data.get('passphrase')
-    # if phrase != 'icecream':
-    #     return jsonify({'message': 'Request failed'}), 400
-    return cron.cron_run()
+    data = request.get_json()
+    phrase = request.headers.get('Authorization')
+    if phrase != 'icecream999':
+        return jsonify({'message': 'Request failed'}), 400
+    r = cron.cron_run()
+    return "", 200
     # """ **** FINISH
 
 
@@ -225,7 +227,7 @@ def get_user_data():
     supa_wrapper = app_controller.supa_wrapper
     text, code = supa_wrapper.get_items(access_token=token,
                                         app=app_c,
-                                        limit=10,
+                                        limit=None,
                                         table='job_apps_yesterday'
                                         )
 

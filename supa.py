@@ -24,16 +24,17 @@ class SupaClientWrapper:
     def write_yday_to_persist(self, data_dict=None):
         """ write data update to persist table """
         """ SERVICE ROLE! """
-        data, code = self.service_add_item_to_table(data_dict=data_dict,
+        data, code = self.service_add_item_to_table(data_list_dicts=data_dict,
                                                     table_name='job_apps_persist')
-        if code != 200:
-            raise Exception(f"Bad request {code} is not")
-        return
+        # if code != 200:
+        #     raise Exception(f"Bad request {code} is not")
+        return code
 
     def overwrite_yday_table(self, table_name="job_apps_yesterday",
                              data_dict=None):
         """ delete and update table """
         """ delete all columns - (where id != -1) """
+        """ INSERT: list of dicts """
 
         response1 = (self.sb_client.table("job_apps_yesterday")
                     .delete()
@@ -41,7 +42,7 @@ class SupaClientWrapper:
                     .execute())
 
         response2 = (self.sb_client.table("job_apps_yesterday")
-                     .insert(data_dict))
+                     .insert(data_dict).execute())
 
         return response1, response2
 
@@ -65,8 +66,6 @@ class SupaClientWrapper:
                     .select('email, password')
                     .eq('all_users.email', email)
                     .execute())
-
-
         return
 
     def supa_login(self, email: str, password: str,
@@ -131,13 +130,13 @@ class SupaClientWrapper:
             app.logger.error(e)
             return "Bad login", 401
 
-    def service_add_item_to_table(self, data_dict=None,
+    def service_add_item_to_table(self, data_list_dicts=None,
                                   table_name='job_apps_persist'):
         """ service role only """
         try:
             response = (
                 self.sb_client.table(table_name)
-                .insert(data_dict)
+                .insert(data_list_dicts)
                 .execute()
             )
             data = response.data

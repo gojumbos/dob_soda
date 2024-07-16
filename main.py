@@ -14,8 +14,9 @@ import constants
 
 import em
 
+from cron import dob_get_new_data
 
-def dob_get_new_data(date_pre, date_post, token, logger,
+def gloooo(date_pre, date_post, token, logger,
                      cols=None):
 
     """ Job application filings """
@@ -29,8 +30,10 @@ def dob_get_new_data(date_pre, date_post, token, logger,
     default_cols = constants.DEFAULT_SODA_COLS if cols is None else cols
 
     soql1 = f'?$select={default_cols}&'
+    """ DATE QUERY TERM !!! """
     # soql2 = '$where=permit_issue_date between \'2024-06-10T00:00:00.000\' and \'2024-06-12T00:00:00.000\''  # date
-    soql2 = f'$where=filing_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
+    # soql2 = f'$where=filing_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
+    soql2 = f'$where=current_status_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
 
     file_type = 'json'  # json
     url = f'https://data.cityofnewyork.us/resource/w9ak-ipjd.{file_type}' + soql1 + soql2
@@ -65,7 +68,7 @@ def supa_write_yesterday_data(data: list, supa_client: SupaClientWrapper, logger
 
 
 def main(prev_step_back=1):
-    supa_wrapper = SupaClientWrapper()
+    supa_wrapper = SupaClientWrapper(service=True)
     logger = logging.getLogger('logger')
 
     """ dob updates on weekends ! """
@@ -88,7 +91,8 @@ def main(prev_step_back=1):
     token = constants.SODA_TOKEN
     token_sec = "RwclQaOeEK3K09Pf1OnuZTGQ9e8g8the-oBT"
 
-    cols = "bin,owner_s_business_name,house_no,street_name,borough,filing_date,filing_status"
+    # cols = "bin,owner_s_business_name,house_no,street_name,borough,filing_date,filing_status"
+    cols = constants.DEFAULT_SODA_COLS
 
     # r.text ->
     data = dob_get_new_data(date_post=today, date_pre=prev_day, token=token, logger=logger,
@@ -97,6 +101,9 @@ def main(prev_step_back=1):
     email = em.EmailInterface(dummy=True, supa_wrapper=supa_wrapper,)
 
     # 6/26 - added bin no.
+
+    r1 = supa_wrapper.write_yday_to_persist(data_dict=data, )
+    r2, r3 = supa_wrapper.overwrite_yday_table(data_dict=data, )
 
 
     send = True
