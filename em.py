@@ -31,7 +31,7 @@ class EmailInterface:
         self.ses_client = boto3.client('ses', region_name=aws_region)
 
         # supa
-        # self.supa = SupaClientWrapper()
+        # self.supa = SupaClientWrapper()  # local wrapper
         self.supa = supa_wrapper
 
         """ SUPABASE """
@@ -148,7 +148,7 @@ class EmailInterface:
                         email_body_raw_data: str,
                         email_subject='NYC Transactions - Test',
                         recipient_email='nyctransactions@gmail.com',
-                        sender_email=None,
+                        sender_email='nyctransactions@gmail.com',
                         cols=None
                         ):
         """ email body data: """
@@ -194,7 +194,8 @@ class EmailInterface:
                     if k == 'filing_date':
                         # row[k] = datetime.strptime(row[k], '%m-%d-%Y')
                         row[k] = row[k][:10]
-                    a.td(_t=row[k])
+                    a.td(_t=row[k]) if k in row else a.td(_t="NULL")
+                    # a.td(_t=row[k])
         table_str = str(a)
         full_email_html = self.fill_email_html(table=table_str)
         with open(sample_file, 'w') as f:

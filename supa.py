@@ -21,13 +21,29 @@ class SupaClientWrapper:
             return
         return
 
-    def overwrite_yday_table(self, table_name: str, rows: List):
-        # response = supabase.table('all_users').select("email_address").execute()
-
-        data, count = ((self.sb_client.table(table_name=table_name)
-                       .insert({"id": 1, "name": "Denmark"}))
-                       .execute())
+    def write_yday_to_persist(self, data_dict=None):
+        """ write data update to persist table """
+        """ SERVICE ROLE! """
+        data, code = self.service_add_item_to_table(data_dict=data_dict,
+                                                    table_name='job_apps_persist')
+        if code != 200:
+            raise Exception(f"Bad request {code} is not")
         return
+
+    def overwrite_yday_table(self, table_name="job_apps_yesterday",
+                             data_dict=None):
+        """ delete and update table """
+        """ delete all columns - (where id != -1) """
+
+        response1 = (self.sb_client.table("job_apps_yesterday")
+                    .delete()
+                    .neq('id',-1)
+                    .execute())
+
+        response2 = (self.sb_client.table("job_apps_yesterday")
+                     .insert(data_dict))
+
+        return response1, response2
 
     def read_table(self, table_name='job_apps_yesterday',
                    col_names='*',
@@ -115,6 +131,22 @@ class SupaClientWrapper:
             app.logger.error(e)
             return "Bad login", 401
 
+    def service_add_item_to_table(self, data_dict=None,
+                                  table_name='job_apps_persist'):
+        """ service role only """
+        try:
+            response = (
+                self.sb_client.table(table_name)
+                .insert(data_dict)
+                .execute()
+            )
+            data = response.data
+
+            return data, 200
+
+        except Exception as e:
+            return "Bad login", 401
+
     def add_item_to_table(self, access_token=None, app=None, data_dict=None,
                           table_name="entities_tracked",
                           ):
@@ -138,7 +170,6 @@ class SupaClientWrapper:
         """ check if user session is active
          >> reload data
          """
-
         try:
             res = self.sb_client.auth.get_session()
             data = res.data

@@ -48,6 +48,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>Bin </th>
                     <th>Owner Business Name </th>
                     <th>House No. </th>
                     <th>Street </th>

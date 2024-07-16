@@ -18,6 +18,8 @@ import os
 from random import randint
 import soda
 
+import cron
+
 """ New 6.19 """
 # api routes
 import routes
@@ -74,8 +76,6 @@ logger = logging.getLogger('logger')
 
 
 
-
-
 @app.route('/', methods=['GET'])
 def home():  # put application's code here
     # token = request.cookies['cookie1']
@@ -103,65 +103,19 @@ def api_home():  # put application's code here
     #         return "", 500
     return flask.render_template('index.html')
 
+
 # soda
 @app.route('/api/soda_get_update', methods=['POST'])
 def soda_check_update():
-    """ **** FINISH
-    should only be called on weekdays - cron job
+    """ api endpoint for cron job
+    basic pass phrase check, non-security viable
     """
-    token = request.cookies['cookie1']
-    col = 'created_at'
-
-    tables = {'building': 'buildings_tracked',
-              'entity': 'entities_tracked',
-              'filing': 'filings_tracked'
-              }
-
-    app_ = app
-    supa_wrapper = app_controller.supa_wrapper
-    """ GET DATA - SODA """
-    today = datetime.today()
-    prev_day = datetime.now() - timedelta(days=1)
-    if today.weekday() == 0:
-        prev_day = today - timedelta(days=3)
-    token = "gbW4sPjH0aZDjC0mdLxZOvItb"
-    text, code = soda.dob_get_update(date_pre=prev_day,
-                                     date_post=today,
-                                     token=token)
-
-
-    """ PASS TO SUPA """
-    #
-
-    """ EMAIL """
-    email = em.EmailInterface(dummy=True, supa_wrapper=supa_wrapper, )
-
-    # 6/26 - added bin no.
-    cols = "bin,owner_s_business_name,house_no,street_name,borough,filing_date,filing_status"
-
-    send = False
-    data = ""
-    if send:
-        email.send_email_html(
-            email_body_raw_data=data,
-            cols=cols
-        )
-        email.send_email_html(
-            email_body_raw_data=data,
-            cols=cols,
-            recipient_email='drborcich@gmail.com'
-        )
-    if code == 200:
-        # response = jsonify(text), 200
-        # app_c.logger.info(response)
-        # html = prepare_data_table(input_text=text)
-        response = "success", 200
-        return response
-    else:
-        response = jsonify({'message': 'Request failed'}), 400
-        app.logger.info(response)
-
-    return
+    data = request.get_json()
+    phrase = data.get('passphrase')
+    if phrase != 'icecream':
+        return jsonify({'message': 'Request failed'}), 400
+    return cron.cron_run()
+    # """ **** FINISH
 
 
 @app.route('/api/delete_item', methods=['POST'])
