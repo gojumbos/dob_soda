@@ -58,7 +58,7 @@ class SupaClientWrapper:
                     if col == constants.ENT_LIST_COLS[0]:
                         afn, aln = constants.ENT_LIST_COLS[0], constants.ENT_LIST_COLS[1]
                         if (afn in jay_row and aln in jay_row):
-                            if ent_row[afn] == jay_row[afn] and ent_row[aln] == jay_row[aln]:
+                            if ent_row[afn].lower() == jay_row[afn].lower() and ent_row[aln].lower() == jay_row[aln].lower():
                                 # ent_res[ent_row["user_id"]] = "" + str(ent_row[afn]) + " " + str(ent_row[aln])
                                 # ent_res[ent_row["user_id"]].append("" + str(ent_row[afn]) + " " + str(ent_row[aln]))
                                 if ent_row["user_id"] not in ent_res:
@@ -66,12 +66,13 @@ class SupaClientWrapper:
                                 ent_res[ent_row["user_id"]].append(jay_row)
                     elif col != constants.ENT_LIST_COLS[1]:
                         """ RETURN THE WHOLE ROW """
-                        if col in jay_row:
-                            if ent_row[col] == jay_row[col]:
-                                # ent_res[ent_row["user_id"]] = ent_row[col]
-                                if ent_row["user_id"] not in ent_res:
-                                    ent_res[ent_row["user_id"]] = []
-                                ent_res[ent_row["user_id"]] = ent_row
+                        if col and (col in jay_row and col in ent_row):
+                            if ent_row[col] and jay_row[col]:
+                                if ent_row[col].lower() == jay_row[col].lower():
+                                    # ent_res[ent_row["user_id"]] = ent_row[col]
+                                    if ent_row["user_id"] not in ent_res:
+                                        ent_res[ent_row["user_id"]] = []
+                                    ent_res[ent_row["user_id"]] = ent_row
 
         # filings_data_supa = self.check_item_table_for_updates(table_name="filings_tracked")
         return build_res, ent_res  # 2 dicts of lists of dicts

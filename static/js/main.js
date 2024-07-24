@@ -1,6 +1,6 @@
 
-// const HOME_URL = 'http://127.0.0.1:8000/api'
-const HOME_URL = 'https://clownfish-app-8om3z.ondigitalocean.app/dob-soda2/api'
+const HOME_URL = 'http://127.0.0.1:8000/api'
+// const HOME_URL = 'https://clownfish-app-8om3z.ondigitalocean.app/dob-soda2/api'
 
 const DATA_INDICATOR = "data";
 const LOGIN_INDICATOR = "login";
@@ -80,7 +80,7 @@ function hideEntityInputField() {
     ent.style.display = 'none';
     // let tfr = document.getElementById(`${type_lit}-form-response`);
     try {
-        let tfr = document.getElementById('input-form-response');
+        let tfr = document.getElementById('tracking-form-response');
         tfr.display.textContent = "--";
         tfr.className = "neutral-message";
     } catch (e) {console.log(e) }
@@ -452,10 +452,10 @@ async function showEntitySubmitResult(msg, was_success, type_lit) {
     // prom should be resolved
     prom.then(() => {
          if (was_success === true) {
-         tfr.className = 'success-message';
-         console.log("SUCCESS")
-     } else { tfr.className = 'error-message'; }
-     tfr.textContent = msg;
+            tfr.className = 'success-message';
+            console.log("SUCCESS")
+         } else { tfr.className = 'error-message'; }
+            tfr.textContent = msg;
      });
 }
 
@@ -466,13 +466,16 @@ async function subEntWrapper(event) {
 
     const prom = new Promise(() => {
        console.log("subEnt");
-       submitEntity(event);
+       let r = submitEntity(event);
        // getTrackedEntities();
-         let entitiesData = getTrackedEntities();
-        entitiesData.then(v => {
+        r.then(() => {
+            let entitiesData = getTrackedEntities();
+            entitiesData.then(v => {
             data_container.entities = v;
             showEntitiesTable(true);
-    });
+            });
+        });
+
     console.log("485");
     });
 }
@@ -480,17 +483,17 @@ async function subEntWrapper(event) {
 async function subBuildWrapper(event) {
     const prom = new Promise(() => {
        console.log("subBuild");
-       let r = new Promise(event);
+        let r = submitBuilding(event);
        // getTrackedEntities();
+        console.log("488")
         r.then(() => {
-
-        });
-         let buildData = getTrackedBuildings();
-        buildData.then(v => {
+            console.log("489")
+            let buildData = getTrackedBuildings();
+            buildData.then(v => {
             data_container.buildings = v;
             showBuildingsTable(true);
-    });
-    console.log("485");
+                });
+        });
     });
 }
 
@@ -560,21 +563,25 @@ function clickDeleteEntity() {
     const arr = [fn, ln, biz, lic]
 
     let p = deleteItem('entity', col, cell_data);  // entity
-    let r = p.then( () => {
+    p.then( () => {
             clickEntityButton();
         }
     )
 
 }
 
-function clickDeleteBuilding() {
+async function clickDeleteBuilding() {
     // only option for building is bin
     const item_id = document.getElementById('del_bin_no').value;
-    let p = deleteItem('building',  'bin', item_id);  // building
-    let r = p.then( () => {
-            clickBuildingButton();
-        }
-    )
+    // item_id.then(() => {
+    //
+    // });
+    // let p = deleteItem('building',  'bin', item_id);  // building
+    // p.then( () => {
+    //    clickBuildingButton();
+    // });
+    await deleteItem('building',  'bin', item_id);
+    await clickBuildingButton();
 
 }
 
@@ -602,13 +609,13 @@ async function deleteItem(item_type, lookup_col, item_id) {
     if (response.ok) {
       const msg= 'Deletion successful';
       console.log(msg);
-      showEntitySubmitResult(msg,true, 'item_type');
+      showEntitySubmitResult(msg,true, item_type);
 
     } else {
         // never called... issue
       const errMsg = 'Deletion Failed';
       console.error(errMsg);
-      showEntitySubmitResult(errMsg, false, 'item_type');
+      showEntitySubmitResult(errMsg, false, item_type);
     }
   })
   .catch(error => {

@@ -1,7 +1,15 @@
 <!DOCTYPE html><html><head>    <meta charset="UTF-8">    <title>Email Template</title>    <style>        body {            font-family: Arial, sans-serif;            line-height: 1.6;        }        .container {            width: 80%;            margin: 0 auto;            padding: 20px;            border: 1px solid #ccc;            background-color: #f9f9f9;        }        h1 {            text-align: center;            color: #333;        }        table {            width: 100%;            border-collapse: collapse;            margin: 20px 0;        }        th, td {            border: 1px solid #ccc;            padding: 10px;            text-align: left;        }        th {            background-color: #f2f2f2;        }        .footer {            text-align: center;            margin-top: 20px;            font-size: 0.9em;            color: #666;        }    </style></head><body>    <div class="container">        <h1>Email Report</h1>        <p>Dear Recipient,</p>        <p>The below data from this morning's update was found to match items you are tracking:  </p>        <table>            <thead>                <tr>                    <th>Bin </th> <th> Applicant First Name </th> <th> Applicant Last Name </th><th> Filing Representative Business Name </th><th> Applicant License </th><th> Owner's Business Name </th>                </tr>            </thead>            <tbody>                <tr>
-  <td>01010</td>
   <td>--</td>
   <td>--</td>
+  <td>--</td>
+  <td>--</td>
+  <td>--</td>
+  <td>--</td>
+</tr>
+<tr>
+  <td>8888</td>
+  <td>RUSSEL</td>
+  <td>PETERS</td>
   <td>--</td>
   <td>--</td>
   <td>--</td>
