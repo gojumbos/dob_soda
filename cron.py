@@ -17,7 +17,8 @@ import constants
 
 
 def dob_get_new_data(date_pre, date_post, token, logger=None,
-                     cols=None):
+                     cols=None, write_to_disk=False,
+                     ):
 
     """ Job application filings """
     """ returns a list of dicts """
@@ -42,7 +43,6 @@ def dob_get_new_data(date_pre, date_post, token, logger=None,
     # task = asyncio.create_task(make_request(url=url, headers=headers))
     # r = asyncio.run(requests.get(url, headers=headers))
     r = requests.get(url, headers=headers)
-
     """ insert nulls """
     res = r.json()  # list of dicts
     col_list = default_cols_str.split(',')
@@ -53,13 +53,9 @@ def dob_get_new_data(date_pre, date_post, token, logger=None,
 
     print(r.status_code)
     print(r.headers['content-type'], r.encoding)
-    with open(f'{str(f_date_post)}.json', 'w') as f:
-        json.dump(r.json(), f)
-
-    # with open('all_data_job_app.csv', newline='') as csvfile:
-    #     wrt = csv.writer(csvfile, delimiter=' ', quotechar='|')
-    #     for row in wrt:
-    #         print(', '.join(row))
+    if write_to_disk:
+        with open(f'{str(f_date_post)}.json', 'w') as f:
+            json.dump(r.json(), f)
 
     return res
 
@@ -82,34 +78,52 @@ def cron_run():
     if today.weekday() == 0:  # if monday >> get friday
         prev_day = today - timedelta(days=3)
     token = constants.SODA_TOKEN
-    data_dict = dob_get_new_data(date_pre=prev_day,
-                                date_post=today,
-                                token=token,
+    # list of dicts
+    soda_data_dict = dob_get_new_data(date_pre=prev_day,
+                                 date_post=today,
+                                 token=token,
                                  )
 
+    # cols = "bin,owner_s_business_name,house_no,street_name,borough,filing_date,filing_status"
 
-    cols = "bin,owner_s_business_name,house_no,street_name,borough,filing_date,filing_status"
-
-    """ PASS TO SUPA """
+    """ WRITE TO SUPA """
     #
-    r1 = service_supa_w.write_yday_to_persist(data_dict=data_dict, )
-    r2, r3 = service_supa_w.overwrite_yday_table(data_dict=data_dict,)
+    r1 = service_supa_w.write_yday_to_persist(data_dict=soda_data_dict, )
+    r2, r3 = service_supa_w.overwrite_yday_table(data_dict=soda_data_dict,)
 
+    """ READ FROM SUPA - CHECK AGAINST ALL ITEM TYPES """
+    """ for all users, check against all items """
+    # supa: dict(list(dict))
+    b_dict, e_dict = service_supa_w.check_all_tables(jay_data_list=soda_data_dict)
+
+    # read table >> entities tracked
+    # " >> buildings tracked
+    # " >> filings tracked
+    # check against r1, r2, r3
 
     """ EMAIL """
     emi = em.EmailInterface(dummy=True, supa_wrapper=service_supa_w, )
 
     # 6/26 - added bin no.
-    cols = "bin,owner_s_business_name,house_no,street_name,borough,filing_date,filing_status"
+    # cols = "bin,owner_s_business_name,house_no,street_name,borough,filing_date,filing_status"
+
+    email_li_dict = service_supa_w.get_all_users()
 
     send = True
-    data = ""
     if send:
-        emi.send_email_html(
-            email_body_raw_data=data,
-            cols=cols,
-            recipient_email='drborcich@gmail.com'
-        )
+        for di in email_li_dict:
+            uid, email_add = di['user_id'], di['email_address']
+            b = b_dict[uid] if uid in b_dict else [{}]
+            # e = "".join(e_dict[uid]) if uid in e_dict else "NULL"
+            e = e_dict[uid] if uid in e_dict else [{"NULL": "NULL"}]
+            b.extend(e)
+
+            # s >> LIST OF DICTS, each dict is a match record
+            emi.send_email_html(
+                email_body_raw_data=b,
+                cols=constants.ENTITY_COLS,
+                recipient_email=email_add
+            )
 
     return 200
 

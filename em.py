@@ -144,8 +144,10 @@ class EmailInterface:
                         email_subject=email_subject,
                         recipient_email=recipient_email)
 
+
+
     def send_email_html(self,
-                        email_body_raw_data: str,
+                        email_body_raw_data: List,
                         email_subject='NYC Transactions - Test',
                         recipient_email='nyctransactions@gmail.com',
                         sender_email='nyctransactions@gmail.com',
@@ -179,6 +181,7 @@ class EmailInterface:
     def get_email_html(self, raw_data=None, cols=None,
                        sample_file='html_.txt'):
         """ sort the keys for consistency! """
+        """ expecting list of dicts """
         a = Airium()
         if not cols:
             sorted_keys = sorted(list(raw_data[0].keys()))
@@ -194,10 +197,11 @@ class EmailInterface:
                     if k == 'filing_date':
                         # row[k] = datetime.strptime(row[k], '%m-%d-%Y')
                         row[k] = row[k][:10]
-                    a.td(_t=row[k]) if k in row else a.td(_t="NULL")
+                    a.td(_t=row[k]) if k in row else a.td(_t=constants.DASH)
                     # a.td(_t=row[k])
         table_str = str(a)
-        full_email_html = self.fill_email_html(table=table_str)
+        full_email_html = self.fill_email_html(table=table_str,
+                                               cols=cols)
         with open(sample_file, 'w') as f:
             f.write(full_email_html)
         return full_email_html
@@ -209,12 +213,16 @@ class EmailInterface:
         print(html)
         return html
 
-    def fill_email_html(self, table):
-        with open('sample_email.txt', 'r') as f:
+    def fill_email_html(self, table, cols=None):
+        """
+        TO DO: allow custom cols
+        """
+        with open('cust_cols_email.txt', 'r') as f:
             html = f.read()
+        html = html.replace(constants.HTML_HEADERS_INS, constants.HTML_ENT_LIST_COLS)
         html = html.replace('\n', '')
         print(html)
-        html = html.replace('XXXXXXX', table)
+        html = html.replace(constants.HTML_BODY_INS, table)
         return html
 
     def template_table_js(self, raw_data=None, cols=None,
@@ -223,7 +231,6 @@ class EmailInterface:
         a = Airium(source_line_break_character="")
         if not cols:
             sorted_keys = sorted(list(raw_data[0].keys()))
-
             # DANGER
         else:
             # space seps !!! be careful

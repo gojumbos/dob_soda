@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 import flask
 
 import supa
-from main import main
 import em
 
 import html
@@ -116,6 +115,7 @@ def soda_check_update():
     if phrase != 'icecream999':
         return jsonify({'message': 'Request failed'}), 400
     r = cron.cron_run()
+
     return "", 200
     # """ **** FINISH
 
@@ -259,6 +259,7 @@ def get_user_tracked_entities():
                                         app=app_,
                                         table='entities_tracked',
                                         limit=None)
+    logger.info("t", text)
     if code == 200:
         # response = jsonify(text), 200
         # app_c.logger.info(response)
@@ -364,13 +365,16 @@ def get_user_tracked_buildings():
 
 
 
-def prepare_data_table(input_text=""):
-    """"""
+def prepare_data_table(input_text="",):
+    """
+    user data = all JAY data, basic
+    entity
+    building
+    """
     html = ""
     emi = em.EmailInterface(dummy=True)
     html = emi.template_table_js(raw_data=input_text,
                                  )
-
     return html
 
 

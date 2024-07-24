@@ -32,27 +32,30 @@
     </div>
     <div></div>
     <div id="success-container"></div>
-    <button type="submit" id="dob-yday"> Refresh Data </button>
     <div id="input-tracking">
         <h2>Input Entity To Track (type required): </h2>
-        <form onsubmit="submitEntity(event)">
+        <form onsubmit="subEntWrapper(event)">
             <input type="text" id="entity_type" placeholder="Enter Individual/Business" required>
           <input type="text" id="first_name_et" placeholder="Applicant First Name" >
           <input type="text" id="last_name_et" placeholder="Applicant Last Name" >
             <input type="text" id="biz_name_o_et" placeholder="Owner's Business Name" >
             <input type="text" id="license" placeholder="Applicant License" >
+{#            <input type="radio" id="entity_type_ind" value="ind"  />#}
+{#            <label for="entity_type_ind">Individual</label>#}
+{#            <input type="radio" id="entity_type_biz" value="biz"  />#}
+{#            <label for="entity_type_biz">Business</label>#}
             <button type="submit">Submit</button>
         </form>
-        <div id="tracking-form-response"> -- </div>
+        <div id="tracking-form-response" class="none"> -- </div>
 
     </div>
      <div id="building-tracking">
         <h2>Input Building To Track: </h2>
-        <form onsubmit="submitBuilding(event)">
+        <form onsubmit="subBuildWrapper(event)">
             <input type="text" id="bin_no" placeholder="bin number" >
             <button type="submit">Submit</button>
         </form>
-        <div id="building-form-response"> -- </div>
+        <div id="building-form-response" class="none"> -- </div>
         <br>
          <h2>Input Building To Delete: </h2>
          <form onsubmit="clickDeleteBuilding(event)" id="del-building">
@@ -71,8 +74,6 @@
         <div id="error-container"></div>
     </div>
     <div id="low-anchor"></div>
-{#<script src="{{ url_for('static', filename='js/main.js') }}"></script>#}
-{#<script src="/js/main.js"></script>#}
     <script>
         {{ js_content | safe }}
     </script>

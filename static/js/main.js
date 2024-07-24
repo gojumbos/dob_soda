@@ -1,8 +1,6 @@
 
 // const HOME_URL = 'http://127.0.0.1:8000/api'
-// const HOME_URL = 'https://clownfish-app-8om3z.ondigitalocean.app/api:8000'
 const HOME_URL = 'https://clownfish-app-8om3z.ondigitalocean.app/dob-soda2/api'
-// const HOME_URL = 'https://couponsdomain.com:8000';
 
 const DATA_INDICATOR = "data";
 const LOGIN_INDICATOR = "login";
@@ -261,13 +259,7 @@ function hideDataButton() {
         successContainer.appendChild(msg);
         hideLoginForm();
         homePageAndDataFetch();
-        // currScreenIndicator = DATA_INDICATOR;
-        // const btn = document.createElement('button');
-        // btn.textContent = "Load data";
-        // btn.id = "dataLoaderButton";
-        // btn.className = "btn";
-        // btn.addEventListener('click', homePageAndDataFetch);
-        // successContainer.appendChild(btn);
+
     }
 }
 
@@ -333,7 +325,7 @@ function showAnchor() {
 }
 
 // -Entities
-async function getTrackedEntities(event) {
+async function getTrackedEntities() {
   const url = HOME_URL;
   // Get the form values
   // const email = document.getElementById('user_email').value;
@@ -355,9 +347,7 @@ async function getTrackedEntities(event) {
     if (response.ok) {
       const msg= 'entities fetched';
       console.log(msg);
-      // displaySuccessfulLogin(msg, email);
-      // UPDATE EMAIL
-      // currUserEmail = email;
+
       let r = response.text();
       // r.then(data_container.userEmail = r);
       r.then(() => {data_container.entities = r});
@@ -367,6 +357,7 @@ async function getTrackedEntities(event) {
       const errMsg = 'entities failed';
       console.error(errMsg);
       displayFailedLogin(errMsg);
+      return errMsg;
     }
   })
   .catch(error => {
@@ -376,18 +367,18 @@ async function getTrackedEntities(event) {
 }
 
 
-async function showEntitiesTable() {
-    console.log("show entities ")
+async function showEntitiesTable(refreshBool) {
+    // if refreshBool - want to refresh data in table after data submission
+    console.log("show entities ", refreshBool);
     let elt = document.getElementById('entities-data-table');
-    if (elt == null)
-      {
+    if (elt == null || refreshBool)
+      { if (refreshBool) {elt.remove();}
         let anchor = document.getElementById('anchor');
         var tempDiv = document.createElement('div');
         tempDiv.textContent = "Currently Tracked:"
         tempDiv.id = "entities-data-table";
         let htmlString = data_container.entities;
         tempDiv.innerHTML = htmlString;
-        console.log(htmlString);
         // var tableElement = tempDiv.firstElementChild;
         anchor.appendChild(tempDiv);
     } else if (elt.style.display === 'none') {
@@ -406,10 +397,6 @@ function hideEntitiesTable() {
     }
 }
 
-async function fetchSodaUpdate() {
-    // fetch yesterdays data soda dob
-
-}
 
 async function clickHome() {
     // issue ?
@@ -418,7 +405,6 @@ async function clickHome() {
         console.log("undeff")
         showLoginForm();
         // show fetch button
-
 
     } else {
         // issue ?
@@ -445,27 +431,68 @@ async function clickEntityButton() {
     if (data_container.entities == null) {
         entitiesData = getTrackedEntities();
         entitiesData.then(v => {
-            console.log(v)
             data_container.entities = v;
             showEntitiesTable();
             // switch screens !!
         }
     );
     } else {
-        showEntitiesTable();
+        const r = showEntitiesTable();
     }
 }
 
 async function showEntitySubmitResult(msg, was_success, type_lit) {
-    let tfr = document.getElementById(`${type_lit}-form-response`);
-     if (was_success === true) {
+    // Show results of submission
+    // for both entity and building
+    console.log("type_lit", type_lit, "ws", was_success);
+
+    const prom = new Promise(() => {
+            let tfr = document.getElementById(`${type_lit}-form-response`);
+    });
+    // prom should be resolved
+    prom.then(() => {
+         if (was_success === true) {
          tfr.className = 'success-message';
+         console.log("SUCCESS")
      } else { tfr.className = 'error-message'; }
      tfr.textContent = msg;
+     });
 }
 
 
 // -entity
+
+async function subEntWrapper(event) {
+
+    const prom = new Promise(() => {
+       console.log("subEnt");
+       submitEntity(event);
+       // getTrackedEntities();
+         let entitiesData = getTrackedEntities();
+        entitiesData.then(v => {
+            data_container.entities = v;
+            showEntitiesTable(true);
+    });
+    console.log("485");
+    });
+}
+
+async function subBuildWrapper(event) {
+    const prom = new Promise(() => {
+       console.log("subBuild");
+       let r = new Promise(event);
+       // getTrackedEntities();
+        r.then(() => {
+
+        });
+         let buildData = getTrackedBuildings();
+        buildData.then(v => {
+            data_container.buildings = v;
+            showBuildingsTable(true);
+    });
+    console.log("485");
+    });
+}
 
 async function submitEntity(event) {
     // given form input,
@@ -479,6 +506,9 @@ async function submitEntity(event) {
     const ln = document.getElementById('last_name_et').value;
     const biz = document.getElementById('biz_name_o_et').value;
     const lic = document.getElementById('license').value;
+    // const et_ind = document.getElementById('entity_type_ind').value;
+    // const et_biz = document.getElementById('entity_type_biz').value;
+    // console.log(et_ind, et_biz);
   // Create the request body with the form data
     const requestBody = {
     email: email,
@@ -501,17 +531,13 @@ async function submitEntity(event) {
     if (response.ok) {
       const msg= 'Entity submitted';
       console.log(msg);
-      showEntitySubmitResult(msg,true, 'entity');
-      // let r = response.text();
-      // // r.then(data_container.userEmail = r);
-      // r.then(() => {data_container.entities = r});
-      // return r;
+      showEntitySubmitResult(msg,true, 'tracking');
 
     } else {
         // never called... issue
       const errMsg = 'Submit Failed';
       console.error(errMsg);
-      showEntitySubmitResult(errMsg, false, 'entity');
+      showEntitySubmitResult(errMsg, false, 'tracking');
     }
   })
   .catch(error => {
@@ -591,18 +617,17 @@ async function deleteItem(item_type, lookup_col, item_id) {
 }
 
 
-async function showBuildingsTable() {
+async function showBuildingsTable(refreshBool) {
     console.log("show bt ")
     let elt = document.getElementById('buildings-data-table');
-    if (elt == null)
-      {
+    if (elt == null || refreshBool)
+      { if (refreshBool) {elt.remove();}
         let anchor = document.getElementById('anchor');
         var tempDiv = document.createElement('div');
         tempDiv.textContent = "Buildings Currently Tracked:"
         tempDiv.id = "buildings-data-table";
         let htmlString = data_container.buildings;
         tempDiv.innerHTML = htmlString;
-        console.log(htmlString);
         // var tableElement = tempDiv.firstElementChild;
         anchor.appendChild(tempDiv);
     } else if (elt.style.display === 'none') {
@@ -617,7 +642,7 @@ function hideBuildingsTable() {
         let t = document.getElementById('buildings-data-table');
         t.style.display = 'none';
     } catch (e) {
-        console.log("no buildings table")
+        console.log("no buildings table");
     }
 
 
@@ -635,7 +660,6 @@ async function clickBuildingButton() {
     if (data_container.buildings == null) {
         buildingsData = getTrackedBuildings();
         buildingsData.then(v => {
-            console.log(v)
             data_container.buildings = v;
             showBuildingsTable();
             // switch screens !!

@@ -4,15 +4,36 @@
 import em
 
 import supa
+import constants
 
 sw = supa.SupaClientWrapper(service=True)
 
-dt = [{"house_no": 1991, "bin": "00001"}, {"house_no": 343, "bin": "3333"}]
 
-r, r2 = sw.overwrite_yday_table(data_dict=dt)
+# sw.supa_login(email='drborcich@gmail.com', password='@tfGG67BMxz!Mjj')
 
-print(r, r2)
+dt = [{ "bin": "999999", "street_name": "aa"},
+      { "bin": "45454", },
+       {"house_no": 56565, "bin": "3", "id":-2}]
 
-r = sw.write_yday_to_persist(data_dict=dt)
+# r, r2 = sw.overwrite_yday_table(data_dict=dt)
 
-print(r,)
+# print(r, r2)
+
+# data = sw.read_table(limit=5)
+#
+filtered_data = sw.check_all_tables(jay_data_list=dt)
+print(filtered_data)
+
+# here
+# bt = "buildings_tracked"
+# jay = "job_apps_yesterday"
+# cols = constants.BUILD_COLS
+# r = (
+#     sw.sb_client.table("buildings_tracked")
+#     .select(f"user_id, {jay}!inner({cols})")
+#     .eq(f"{jay}.bin", f"{bt}.bin")
+#     .execute()
+# )
+
+
+# r = sw.write_yday_to_persist(data_dict=dt)
