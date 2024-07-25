@@ -151,12 +151,18 @@ class EmailInterface:
                         email_subject='NYC Transactions - Test',
                         recipient_email='nyctransactions@gmail.com',
                         sender_email='nyctransactions@gmail.com',
-                        cols=None
+                        cols=None,
+                        no_results=False
                         ):
-        """ email body data: """
-
-        email_body_html = self.get_email_html(raw_data=email_body_raw_data,
-                                              cols=cols)
+        """ email body data:
+        if no results, NO_RES email insert
+        """
+        if no_results is True:
+            with open('no_results.txt', 'r') as f:
+                email_body_html = f.read()
+        else:
+            email_body_html = self.get_email_html(raw_data=email_body_raw_data,
+                                                  cols=cols)
 
         # Send the email
         response = self.ses_client.send_email(
@@ -213,9 +219,10 @@ class EmailInterface:
         print(html)
         return html
 
-    def fill_email_html(self, table, cols=None):
+    def fill_email_html(self, table, cols=None,):
         """
         TO DO: allow custom cols
+        returns a string
         """
         with open('cust_cols_email.txt', 'r') as f:
             html = f.read()

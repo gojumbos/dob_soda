@@ -1,11 +1,6 @@
 import json
 import os
 from datetime import datetime, timedelta
-from typing import List
-
-from flask import jsonify
-from supabase import create_client, Client
-from dotenv import load_dotenv
 
 import requests
 
@@ -116,21 +111,20 @@ def cron_run():
             b = b_dict[uid] if uid in b_dict else [{}]
             # e = "".join(e_dict[uid]) if uid in e_dict else "NULL"
             e = e_dict[uid] if uid in e_dict else [{"NULL": "NULL"}]
-            b.extend(e)
 
+            if b == [{}] and e == [{"NULL": "NULL"}]:
+                """ Empty result email"""
+                no_results = True
+            else:
+                no_results = False
+            b.extend(e)
             # s >> LIST OF DICTS, each dict is a match record
             emi.send_email_html(
                 email_body_raw_data=b,
                 cols=constants.ENTITY_COLS,
-                recipient_email=email_add
+                recipient_email=email_add,
+                no_results=no_results
             )
 
     return 200
-
-
-
-
-
-
-
 

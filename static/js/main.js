@@ -1,6 +1,5 @@
 
-const HOME_URL = 'http://127.0.0.1:8000/api'
-// const HOME_URL = 'https://clownfish-app-8om3z.ondigitalocean.app/dob-soda2/api'
+const HOME_URL = '999_';
 
 const DATA_INDICATOR = "data";
 const LOGIN_INDICATOR = "login";

@@ -51,3 +51,7 @@ HTML_ENT_LIST_COLS = ("<th>Bin </th> <th> Applicant First Name </th> " +
                       )
 
 DASH = "--"
+
+HOME_URL_DEV = 'http://127.0.0.1:8000/api'
+HOME_URL_PROD = 'https://clownfish-app-8om3z.ondigitalocean.app/dob-soda2/api'
+

@@ -3,6 +3,7 @@ import re
 from datetime import datetime, timedelta
 
 import flask
+from dotenv import load_dotenv
 
 import supa
 import em
@@ -19,6 +20,7 @@ from random import randint
 import soda
 
 import cron
+import constants
 
 """ New 6.19 """
 # api routes
@@ -64,6 +66,7 @@ sw = supa.SupaClientWrapper()
 app_controller = AppController(supa_wrapper=sw)
 app = app_controller.app_object
 logger = logging.getLogger('logger')
+load_dotenv()
 
 
 # @app.route('/stat', methods=['GET'])
@@ -83,10 +86,16 @@ def home():  # put application's code here
     #     if app_controller.is_on_no_fly_list(token):
     #         return "", 500
     """"""
+    curr_env = os.getenv('CURR_ENV')  # dev/prod
     """ js """
     js_path = os.path.join(app.static_folder, 'js', 'main.js')
     with open(js_path, 'r') as js_file:
         js_content = js_file.read()
+        if curr_env == 'dev':
+            js_content = js_content.replace('999_', constants.HOME_URL_DEV)
+        else:
+            js_content = js_content.replace('999_', constants.HOME_URL_PROD)
+
     """ css """
     css_path = os.path.join(app.static_folder, 'css', 'styles.css')
     with open(css_path, 'r') as css_file:
