@@ -1,4 +1,5 @@
 import logging
+import re
 from datetime import datetime, timedelta
 
 import flask
@@ -286,12 +287,15 @@ def get_new_entity_tracked():
     for f in fields:
         content = data.get(f)
         # ignore empty fields
-        if not content == "":
-            d[f] = content
+        if (not content == "" or content):
+            clean = re.sub('[^A-Za-z0-9]+', '', content)
+            d[f] = clean
             # sanitize
             # need spec
-            if not content.isalnum():
-                return jsonify({'message': 'Bad input characters'}), 400
+            # if not content.isalnum():
+                # return jsonify({'message': 'Bad input characters'}), 400
+                # return jsonify({'message': content}), 400
+
 
     app_ = app
     supa_wrapper = app_controller.supa_wrapper
