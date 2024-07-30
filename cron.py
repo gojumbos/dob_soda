@@ -116,13 +116,13 @@ def cron_run(testing=False):
             e = e_dict[uid] if uid in e_dict else ""
 
             result = []  # list of dicts
-            if b is "" and e is "":
+            if b == "" and e == "":
                 """ Empty result email"""
                 no_results = True
-            elif b is "":
+            elif b == "":
                 no_results = False
                 result = e
-            elif e is "":
+            elif e == "":
                 no_results = False
                 result = b
             else:
