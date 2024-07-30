@@ -29,6 +29,7 @@ DEFAULT_EMAIL_COLS = "bin,owner_s_business_name,house_no,street_name,borough,fil
 # BUILD_COLS = "bin,street_name,house_no,user_id" do not include user id
 BUILD_COLS = "bin,street_name,house_no"
 ENTITY_COLS = "applicant_first_name,applicant_last_name,applicant_license,filing_representative_business_name,owner_s_business_name"
+
 # COLS_LIST = {BUILD_COLS: ""}
 BUILD_LIST_COLS: list = BUILD_COLS.split(",")
 ENT_LIST_COLS: list = ENTITY_COLS.split(",")
@@ -40,8 +41,8 @@ SUPA_JAY = 'job_apps_yesterday'
 SIMPLE_EMAIL_COLS = "bin,name"
 SIMPLE_ENTITY_COLS = "bin,applicant_first_name,applicant_last_name,applicant_license,filing_representative_business_name,owner_s_business_name"
 
-HTML_BODY_INS = "XXX_"
-HTML_HEADERS_INS = "YYY_"
+HTML_BODY_INS_LOC = "XXX_"
+HTML_HEADERS_INS_LOC = "YYY_"
 
 HTML_ENT_LIST_COLS = ("<th>Bin </th> <th> Applicant First Name </th> " +
                       "<th> Applicant Last Name </th>" +

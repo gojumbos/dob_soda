@@ -122,7 +122,7 @@ def soda_check_update():
     """
     # data = request.get_json()
     phrase = request.headers.get('Authorization')
-    if phrase != 'icecream999':
+    if phrase != os.getenv('CRON_KEY'):
         return jsonify({'message': 'Request failed'}), 400
     r = cron.cron_run()
 

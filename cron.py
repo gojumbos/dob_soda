@@ -55,7 +55,7 @@ def dob_get_new_data(date_pre, date_post, token, logger=None,
     return res
 
 
-def cron_run():
+def cron_run(testing=False):
     """ run daily cron job from api call"""
     """ service role required """
 
@@ -75,21 +75,25 @@ def cron_run():
     token = constants.SODA_TOKEN
     # list of dicts
     soda_data_dict = dob_get_new_data(date_pre=prev_day,
-                                 date_post=today,
-                                 token=token,
+                                      date_post=today,
+                                      token=token,
                                  )
 
     # cols = "bin,owner_s_business_name,house_no,street_name,borough,filing_date,filing_status"
 
     """ WRITE TO SUPA """
     #
-    r1 = service_supa_w.write_yday_to_persist(data_dict=soda_data_dict, )
-    r2, r3 = service_supa_w.overwrite_yday_table(data_dict=soda_data_dict,)
+    if not testing:
+        r1 = service_supa_w.write_yday_to_persist(data_dict=soda_data_dict, )
+        r2, r3 = service_supa_w.overwrite_yday_table(data_dict=soda_data_dict,)
 
     """ READ FROM SUPA - CHECK AGAINST ALL ITEM TYPES """
     """ for all users, check against all items """
     # supa: dict(list(dict))
-    b_dict, e_dict = service_supa_w.check_all_tables(jay_data_list=soda_data_dict)
+    b_dict, e_dict = service_supa_w.check_all_tables(soda_data_dict=soda_data_dict)
+    """ CLEAN """
+    # b_dict = service_supa_w.clean_table_results(table_results=b_dict)
+    # e_dict = service_supa_w.clean_table_results(table_results=e_dict)
 
     # read table >> entities tracked
     # " >> buildings tracked
@@ -108,23 +112,28 @@ def cron_run():
     if send:
         for di in email_li_dict:
             uid, email_add = di['user_id'], di['email_address']
-            b = b_dict[uid] if uid in b_dict else [{}]
-            # e = "".join(e_dict[uid]) if uid in e_dict else "NULL"
-            e = e_dict[uid] if uid in e_dict else [{"NULL": "NULL"}]
+            b = b_dict[uid] if uid in b_dict else ""
+            e = e_dict[uid] if uid in e_dict else ""
 
-            if b == [{}] and e == [{"NULL": "NULL"}]:
+            result = []  # list of dicts
+            if b is "" and e is "":
                 """ Empty result email"""
                 no_results = True
+            elif b is "":
+                no_results = False
+                result = e
+            elif e is "":
+                no_results = False
+                result = b
             else:
                 no_results = False
-            b.extend(e)
+                result = b + e
             # s >> LIST OF DICTS, each dict is a match record
             emi.send_email_html(
-                email_body_raw_data=b,
-                cols=constants.ENTITY_COLS,
+                email_body_raw_data=result,
+                cols=constants.SIMPLE_ENTITY_COLS,
                 recipient_email=email_add,
                 no_results=no_results
             )
 
     return 200
-

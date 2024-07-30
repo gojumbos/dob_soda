@@ -445,11 +445,16 @@ async function showEntitySubmitResult(msg, was_success, type_lit) {
     // for both entity and building
     console.log("type_lit", type_lit, "ws", was_success);
 
-    const prom = new Promise(() => {
-            let tfr = document.getElementById(`${type_lit}-form-response`);
-    });
+
+    const tfr = new Promise((tfr) => {
+        document.getElementById(`${type_lit}-form-response`);
+    })
+
+    // const prom = new Promise(() => {
+    //         let tfr = document.getElementById(`${type_lit}-form-response`);
+    // });
     // prom should be resolved
-    prom.then(() => {
+    tfr.then(() => {
          if (was_success === true) {
             tfr.className = 'success-message';
             console.log("SUCCESS")

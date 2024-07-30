@@ -27,13 +27,21 @@ class SupaClientWrapper:
             self.sb_client: Client = create_client(self.url, self.key)
         return
 
-    def check_all_tables(self, jay_data_list=None) :
-        """ check for id match against all 3 item tables, RET 2 DICT of LISTS OF DICTS """
-        """ BIN NUMBER REQUIRED,  """
-        """ CURRENT COLS: BIN, FNAME, LNAME"""
-        """ Entity search: can only match on one column (or first + last name),
-        but can be any column in Entity List Cols, 
-        TAKE ENTIRE ROW (not for build)
+    def clean_table_results(self, dict_):
+        """ given a dict, None -> str(NULL) """
+        for k in dict_.keys():
+            if dict_[k] is None:
+                dict_[k] = "NULL"
+        return dict_
+
+    def check_all_tables(self, soda_data_dict=None):
+        """ check for id match against all 3 item tables, RET 2 DICT of LISTS OF DICTS
+        BIN NUMBER REQUIRED,
+        CURRENT COLS: BIN, FNAME, LNAME
+        Entity search: can only match on one column (or first + last name),
+            but can be any column in Entity List Cols,
+        TAKE ENTIRE ~soda~ ROW (not for build)
+        *** 7/29 >> return soda data, not supa
         """
         build_res, ent_res = {}, {}
         # build_keys = constants.BUILD_LIST_COLS
@@ -41,41 +49,53 @@ class SupaClientWrapper:
         # tracked buildings:
         build_data_supa = self.check_item_table_for_updates(table_name="buildings_tracked")
         for build_row in build_data_supa:
-            for jay_row in jay_data_list:  # non supa
+            for soda_row in soda_data_dict:  # non supa
                 key = "bin"
-                if build_row[key] == jay_row[key]:
+                if build_row[key] == soda_row[key]:
                     # build_res.append([build_row["user_id"], build_row["bin"]])
                     # build_res[build_row["user_id"]] = build_row["bin"]
                     if build_row["user_id"] not in build_res:
                         build_res[build_row["user_id"]] = []
-                    build_res[build_row["user_id"]].append({"bin": build_row["bin"]})
 
+                    # build_res[build_row["user_id"]].append({"bin": build_row["bin"]})
+                    """ clean """
+                    self.clean_table_results(dict_=soda_row)
+                    build_res[build_row["user_id"]].append(soda_row)
+
+        """ ENT """
         ent_data_supa = self.check_item_table_for_updates(table_name="entities_tracked")
         for ent_row in ent_data_supa:
-            for jay_row in jay_data_list:  # dict
+            for soda_row in soda_data_dict:  # dict
                 """ first name, last name => combined"""
                 for col in constants.ENT_LIST_COLS:
                     if col == constants.ENT_LIST_COLS[0]:
                         afn, aln = constants.ENT_LIST_COLS[0], constants.ENT_LIST_COLS[1]
-                        if (afn in jay_row and aln in jay_row):
-                            if (ent_row[afn] and jay_row[afn]) and (ent_row[aln] and jay_row[aln]):
-                                if ent_row[afn].lower() == jay_row[afn].lower() and ent_row[aln].lower() == jay_row[aln].lower():
+                        if (afn in soda_row and aln in soda_row):
+                            if (ent_row[afn] and soda_row[afn]) and (ent_row[aln] and soda_row[aln]):
+                                if ent_row[afn].lower() == soda_row[afn].lower() and ent_row[aln].lower() == soda_row[aln].lower():
                                     # ent_res[ent_row["user_id"]] = "" + str(ent_row[afn]) + " " + str(ent_row[aln])
                                     # ent_res[ent_row["user_id"]].append("" + str(ent_row[afn]) + " " + str(ent_row[aln]))
                                     if ent_row["user_id"] not in ent_res:
                                         ent_res[ent_row["user_id"]] = []
-                                    ent_res[ent_row["user_id"]].append(jay_row)
+                                    """ clean """
+                                    self.clean_table_results(dict_=soda_row)
+                                    ent_res[ent_row["user_id"]].append(soda_row)
                     elif col != constants.ENT_LIST_COLS[1]:
                         """ RETURN THE WHOLE ROW """
-                        if col and (col in jay_row and col in ent_row):
-                            if ent_row[col] and jay_row[col]:
-                                if ent_row[col].lower() == jay_row[col].lower():
+                        if col and (col in soda_row and col in ent_row):
+                            if ent_row[col] and soda_row[col]:
+                                if ent_row[col].lower() == soda_row[col].lower():
                                     # ent_res[ent_row["user_id"]] = ent_row[col]
                                     if ent_row["user_id"] not in ent_res:
                                         ent_res[ent_row["user_id"]] = []
-                                    ent_res[ent_row["user_id"]] = ent_row
+                                    # ent_res[ent_row["user_id"]] = ent_row
+                                    """ clean"""
+                                    self.clean_table_results(dict_=soda_row)
+                                    ent_res[ent_row["user_id"]].append(soda_row)
 
         # filings_data_supa = self.check_item_table_for_updates(table_name="filings_tracked")
+        """ CLEAN """
+
         return build_res, ent_res  # 2 dicts of lists of dicts
 
     def check_item_table_for_updates(self, table_name):

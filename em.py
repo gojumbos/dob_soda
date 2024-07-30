@@ -177,7 +177,7 @@ class EmailInterface:
                     },
                 },
                 'Subject': {
-                    'Data': 'Test',
+                    'Data': 'NYC Transactions ',
                 },
             }
         )
@@ -196,7 +196,7 @@ class EmailInterface:
             # space seps !!! be careful
             sorted_keys = cols.split(",")
 
-        for row in raw_data:  # a dict
+        for row in raw_data:  # list of dicts
             assert type(row) is dict
             with a.tr():
                 for k in sorted_keys:
@@ -226,10 +226,10 @@ class EmailInterface:
         """
         with open('cust_cols_email.txt', 'r') as f:
             html = f.read()
-        html = html.replace(constants.HTML_HEADERS_INS, constants.HTML_ENT_LIST_COLS)
+        html = html.replace(constants.HTML_HEADERS_INS_LOC, constants.HTML_ENT_LIST_COLS)
         html = html.replace('\n', '')
         print(html)
-        html = html.replace(constants.HTML_BODY_INS, table)
+        html = html.replace(constants.HTML_BODY_INS_LOC, table)
         return html
 
     def template_table_js(self, raw_data=None, cols=None,
