@@ -127,7 +127,7 @@ def soda_check_update():
     r = cron.cron_run()
 
     return "", 200
-    # """ **** FINISH
+
 
 
 @app.route('/api/delete_item', methods=['POST'])
@@ -269,7 +269,6 @@ def get_user_tracked_entities():
                                         app=app_,
                                         table='entities_tracked',
                                         limit=None)
-    logger.info("t", text)
     if code == 200:
         # response = jsonify(text), 200
         # app_c.logger.info(response)

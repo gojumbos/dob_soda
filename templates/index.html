@@ -47,6 +47,13 @@
             <button type="submit">Submit</button>
         </form>
         <div id="tracking-form-response" class="none"> -- </div>
+        <br>
+         <h2>Input Entity To Delete (by id): </h2>
+         <form onsubmit="subDeleteEntWrapper(event)" id="del-building">
+            <input type="text" id="del_ent_id" placeholder="id" >
+            <button type="submit">Submit</button>
+        </form>
+         <div id="tracking-form-response-del" class="none"> -- </div>
 
     </div>
      <div id="building-tracking">
@@ -55,13 +62,14 @@
             <input type="text" id="bin_no" placeholder="bin number" >
             <button type="submit">Submit</button>
         </form>
-        <div id="building-form-response" class="none"> -- </div>
+        <div id="building-form-response-sub" class="none"> -- </div>
         <br>
          <h2>Input Building To Delete: </h2>
-         <form onsubmit="clickDeleteBuilding(event)" id="del-building">
+         <form onsubmit="subDeleteBuildWrapper(event)" id="del-building">
             <input type="text" id="del_bin_no" placeholder="bin number" >
             <button type="submit">Submit</button>
         </form>
+         <div id="building-form-response-del" class="none"> -- </div>
     </div>
     <div id="anchor"></div>
     <div class="login-form" id="login-formm">

@@ -69,6 +69,7 @@ def cron_run(testing=False):
 
     """ GET DATA - SODA """
     today = datetime.today()
+    # today = datetime.today() - timedelta(days=1)  # danger
     prev_day = datetime.now() - timedelta(days=1)
     if today.weekday() == 0:  # if monday >> get friday
         prev_day = today - timedelta(days=3)

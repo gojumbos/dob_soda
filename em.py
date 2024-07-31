@@ -243,7 +243,7 @@ class EmailInterface:
             # space seps !!! be careful
             sorted_keys = cols.split(",")
         # SANITIZE !
-        san = ["user_id", "User_id", "id", "Id", "Created_at"]
+        san = ["user_id", "User_id", "Created_at"]  # 7/30
         for key in sorted_keys:
             if key in san:
                 sorted_keys.remove(key)
