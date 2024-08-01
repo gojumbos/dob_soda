@@ -45,12 +45,11 @@ SIMPLE_ENTITY_COLS = "bin,house_no,street_name,borough,applicant_first_name,appl
 HTML_BODY_INS_LOC = "XXX_"
 HTML_HEADERS_INS_LOC = "YYY_"
 
-HTML_ENT_LIST_COLS = ("<th>Bin </th> <th> House No. </th> <th> Street </th> " +
-                      "<th> Boro </th> " +
+HTML_ENT_LIST_COLS = ("<th>Bin </th> <th> Address </th> " +
+                      "<th> Boro </th>" +
                       "<th> Applicant First Name </th> " +
                       "<th> Applicant Last Name </th>" +
                       "<th> Filing Representative Business Name </th>" +
-                      "<th> Applicant License </th>" +
                       "<th> Owner's Business Name </th>"
                       )
 

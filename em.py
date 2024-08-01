@@ -185,7 +185,9 @@ class EmailInterface:
         print("Email sent! Message ID:", response['MessageId'])
 
     def get_email_html(self, raw_data=None, cols=None,
-                       sample_file='html_.txt'):
+                       sample_file='html_.txt',
+                       combine_address=True
+                       ):
         """ sort the keys for consistency! """
         """ expecting list of dicts """
         a = Airium()
@@ -196,6 +198,7 @@ class EmailInterface:
             # space seps !!! be careful
             sorted_keys = cols.split(",")
 
+        """ dash if absent, combine house_no and street name """
         for row in raw_data:  # list of dicts
             assert type(row) is dict
             with a.tr():
@@ -203,7 +206,14 @@ class EmailInterface:
                     if k == 'filing_date':
                         # row[k] = datetime.strptime(row[k], '%m-%d-%Y')
                         row[k] = row[k][:10]
-                    a.td(_t=row[k]) if k in row else a.td(_t=constants.DASH)
+                    if k == 'house_no':
+                        s = row['street_name'] if row['street_name'] else ""
+                        r = str(row['house_no']) + " " + s
+                        a.td(_t=r) if (k in row or row[k] != "NULL") else a.td(_t=constants.DASH)
+                    elif k != 'street_name':
+                        row[k] = constants.DASH if row[k] == "NULL" else row[k]
+                        a.td(_t=row[k]) if (k in row or row[k] != "NULL") else a.td(_t=constants.DASH)
+
                     # a.td(_t=row[k])
         table_str = str(a)
         full_email_html = self.fill_email_html(table=table_str,
