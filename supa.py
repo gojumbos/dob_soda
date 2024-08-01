@@ -34,6 +34,23 @@ class SupaClientWrapper:
                 dict_[k] = "NULL"
         return dict_
 
+    def upd_check_all_tables(self, soda_data_dict=None):
+        build_res, ent_res = {}, {}
+        flat_ ={}
+
+        """ collate all soda data """
+        for d in soda_data_dict:
+            for k in d.keys():
+                if d[k] is not None:
+                    p = (str(k).lower(), str(d[k]).lower())
+                    if p not in flat_:
+                        flat_[p] = []
+
+        build_data_supa = self.check_item_table_for_updates(table_name="buildings_tracked")
+
+
+        return build_res, ent_res
+
     def check_all_tables(self, soda_data_dict=None):
         """ check for id match against all 3 item tables, RET 2 DICT of LISTS OF DICTS
         BIN NUMBER REQUIRED,

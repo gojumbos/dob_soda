@@ -39,12 +39,15 @@ SUPA_ITEM_TABLES = ('buildings_tracked', 'entities_tracked', 'filings_tracked')
 SUPA_JAY = 'job_apps_yesterday'
 
 SIMPLE_EMAIL_COLS = "bin,name"
-SIMPLE_ENTITY_COLS = "bin,applicant_first_name,applicant_last_name,applicant_license,filing_representative_business_name,owner_s_business_name"
+# SIMPLE_ENTITY_COLS = "bin,applicant_first_name,applicant_last_name,applicant_license,filing_representative_business_name,owner_s_business_name"
+SIMPLE_ENTITY_COLS = "bin,house_no,street_name,borough,applicant_first_name,applicant_last_name,filing_representative_business_name,owner_s_business_name"
 
 HTML_BODY_INS_LOC = "XXX_"
 HTML_HEADERS_INS_LOC = "YYY_"
 
-HTML_ENT_LIST_COLS = ("<th>Bin </th> <th> Applicant First Name </th> " +
+HTML_ENT_LIST_COLS = ("<th>Bin </th> <th> House No. </th> <th> Street </th> " +
+                      "<th> Boro </th> " +
+                      "<th> Applicant First Name </th> " +
                       "<th> Applicant Last Name </th>" +
                       "<th> Filing Representative Business Name </th>" +
                       "<th> Applicant License </th>" +

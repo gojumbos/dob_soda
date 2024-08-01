@@ -69,16 +69,6 @@ logger = logging.getLogger('logger')
 load_dotenv()
 
 
-# @app.route('/stat', methods=['GET'])
-# def home():  # put application's code here
-#     # token = request.cookies['cookie1']
-#     # if token:
-#     #     if app_controller.is_on_no_fly_list(token):
-#     #         return "", 500
-#     return flask.render_template('index.html')
-
-
-
 @app.route('/', methods=['GET'])
 def home():  # put application's code here
     # token = request.cookies['cookie1']
@@ -376,7 +366,6 @@ def get_user_tracked_buildings():
     return response
 
 
-
 def prepare_data_table(input_text="",):
     """
     user data = all JAY data, basic
@@ -392,36 +381,3 @@ def prepare_data_table(input_text="",):
 
 
 """ END create app"""
-
-#
-# """ TEST !!  remove me """
-# test = False
-# # test = True
-# if test:
-#     print("TEST")
-#     app = app_controller.app_object
-#     sw = supa.SupaClientWrapper()
-#
-#     acc_token, r = sw.supa_login(email="holden@hrgcap.com", password='hrg')
-#     print(acc_token)
-#
-#     text, code = sw.get_entities(access_token=acc_token,
-#                                            app=app,
-#                                            limit=None)
-#
-#     # data = sw.get_dob_data(access_token=acc_token, app=app)
-#
-#     # text, code = sw.get_dob_data(access_token=acc_token,
-#     #                                        app=app,
-#     #                                        limit=10
-#     #                                        )
-#
-#
-#     # supabase.auth.set_session(access_token=access_token, refresh_token=refresh_token)
-#
-#     html = prepare_data_table(input_text=text)
-#     print(html)
-#
-#
-# # if __name__ == '__main__':
-#     app.run(host='0.0.0.0', port=9000)

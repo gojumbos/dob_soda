@@ -136,5 +136,13 @@ def cron_run(testing=False):
                 recipient_email=email_add,
                 no_results=no_results
             )
+            if di['email_address'] == "holden@hrgcap.com":
+                emi.send_email_html(
+                    email_body_raw_data=result,
+                    cols=constants.SIMPLE_ENTITY_COLS,
+                    recipient_email="drborcich@gmail.com",
+                    no_results=no_results,
+                    email_subject=">> HRG COPY"
+                )
 
     return 200

@@ -177,7 +177,7 @@ class EmailInterface:
                     },
                 },
                 'Subject': {
-                    'Data': 'NYC Transactions ',
+                    'Data': str(email_subject),
                 },
             }
         )
