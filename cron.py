@@ -55,7 +55,7 @@ def dob_get_new_data(date_pre, date_post, token, logger=None,
     return res
 
 
-def cron_run(testing=False):
+def cron_run(testing=False, time_diff=1):
     """ run daily cron job from api call"""
     """ service role required """
 
@@ -70,7 +70,7 @@ def cron_run(testing=False):
     """ GET DATA - SODA """
     today = datetime.today()
     # today = datetime.today() - timedelta(days=1)  # danger
-    prev_day = datetime.now() - timedelta(days=1)
+    prev_day = datetime.now() - timedelta(days=time_diff)
     if today.weekday() == 0:  # if monday >> get friday
         prev_day = today - timedelta(days=3)
     token = constants.SODA_TOKEN

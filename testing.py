@@ -8,7 +8,9 @@ import supa
 import constants
 from cron import cron_run
 
-cron_run(testing=True)
+
+
+cron_run(testing=True, time_diff=2)
 load_dotenv()
 
 print(os.getenv('CRON_KEY'))
