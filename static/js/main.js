@@ -455,25 +455,9 @@ async function showEntitySubmitResult(msg, was_success, type_lit) {
          tfr.className = 'error-message';
      }
      tfr.textContent = msg;
-        return
+     return
     });
 
-
-    // const tfr = new Promise(() => {
-    //     document.getElementById(`${type_lit}-form-response`);
-    // })
-
-    // const prom = new Promise(() => {
-    //         let tfr = document.getElementById(`${type_lit}-form-response`);
-    // });
-    // prom should be resolved
-    // tfr.then(() => {
-    //      if (was_success === true) {
-    //         tfr.className = 'success-message';
-    //         console.log("SUCCESS")
-    //      } else { tfr.className = 'error-message'; }
-    //         tfr.textContent = msg;
-    //  });
 }
 
 
@@ -629,50 +613,6 @@ async function clickDeleteBuilding(event) {
     // only option for building is bin
     const item_id = document.getElementById('del_bin_no').value;
     const res= deleteItem(event,'building',  'bin', item_id);
-    // console.log(res);
-    // const prom = new Promise(() => {
-    //    console.log("del building");
-    //     let r = deleteItem('building',  'bin', item_id);
-    //    // getTrackedEntities();
-    //     console.log("599")
-    //     r.then(() => {
-    //         console.log("601")
-    //         let buildData = getTrackedBuildings();
-    //         buildData.then(v => {
-    //         data_container.buildings = v;
-    //         showBuildingsTable(true);
-    //             });
-    //     });
-    // });
-
-    //
-    // res.then(() => {
-    //     // showEntitySubmitResult(res[0],true, res[1]);
-    //     console.log(596,res[0],res[1]);
-    //     return
-    // }).then(() => {
-    //     clickBuildingButton();
-    //     return
-    // })
-
-    // setTimeout(() )
-    // await showEntitySubmitResult(msg,true, item_type);
-    // await clickBuildingButton();
-
-    // const prom = new Promise(() => { zzz
-    //    console.log("subBuild");
-    //     let r = submitBuilding(event);
-    //    // getTrackedEntities();
-    //     console.log("488")
-    //     r.then(() => {
-    //         console.log("489")
-    //         let buildData = getTrackedBuildings();
-    //         buildData.then(v => {
-    //         data_container.buildings = v;
-    //         showBuildingsTable(true);
-    //             });
-    //     });
-    // });
 
 }
 

@@ -1,13 +1,13 @@
 """ EMAIL """
 import os
-import pickle
 from typing import List
 
 import boto3
+import dateutil
 from dotenv import load_dotenv
 
-from supa import SupaClientWrapper
 from datetime import datetime
+import dateutil
 
 from airium import Airium
 
@@ -236,7 +236,8 @@ class EmailInterface:
         """
         with open('cust_cols_email.txt', 'r') as f:
             html = f.read()
-        html = html.replace(constants.HTML_HEADERS_INS_LOC, constants.HTML_ENT_LIST_COLS)
+        # update 8.7.24
+        html = html.replace(constants.HTML_HEADERS_INS_LOC, constants.HTML_AUG_24_EMAIL_COLS)
         html = html.replace('\n', '')
         print(html)
         html = html.replace(constants.HTML_BODY_INS_LOC, table)
@@ -258,22 +259,14 @@ class EmailInterface:
             if key in san:
                 sorted_keys.remove(key)
 
-        # with a.table():
-            # < thead > < tr > < th > Owner
-            # Business
-            # Name
-            # "
-            # "</th> <th>House No. </th> <th>Street "
-            # "</th> <th>Borough</th> <th>Filing Date "
-            # "</th> <th>Filing Status</th> </tr> </thead>"
-
         for row in raw_data:  # a dict
             assert type(row) is dict
             with a.tr():
                 for k in sorted_keys:
-                    if k == 'filing_date':
-                        # row[k] = datetime.strptime(row[k], '%m-%d-%Y')
-                        row[k] = row[k][:10]
+                    if k in ['filing_date', 'created_at', 'current_status_date', 'permit_issue_date']:
+                        dt = dateutil.parser.parse(row[k])
+                        row[k] = datetime.strftime(dt, '%m-%d-%Y %H:%M')
+                        # row[k] = row[k][:10]
                     a.td(_t=row[k])
 
         # header = constants.ALL_DATA_FETCH_TABLE_HEADER
@@ -285,7 +278,12 @@ class EmailInterface:
     def create_table_headers(self, headers_list):
         result = "<thead>"
         for h in headers_list:
-            h = h.capitalize()
+            li = h.replace("_", " ").split(" ")
+            li = [x.capitalize() + " " for x in li]
+            h = "".join(li)
+            h = "ID" if h == "Id " else h
+            h = "Owner's Business Name" if h == "Owner S Business Name " else h
+            h = h[:len(h)]  # remove trailing space
             result += "<th>" + h + " </th>"
         result = result + "</thead>"
         return result

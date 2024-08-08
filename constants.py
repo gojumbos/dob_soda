@@ -45,6 +45,16 @@ SIMPLE_ENTITY_COLS = "bin,house_no,street_name,borough,applicant_first_name,appl
 HTML_BODY_INS_LOC = "XXX_"
 HTML_HEADERS_INS_LOC = "YYY_"
 
+# update aug 7 24:
+AUG_24_EMAIL_COLS = "house_no,street_name,borough,applicant_first_name,applicant_last_name,filing_representative_business_name,owner_s_business_name"
+HTML_AUG_24_EMAIL_COLS = ("<th> Address </th> " +
+                      "<th> Boro </th>" +
+                      "<th> Applicant First Name </th> " +
+                      "<th> Applicant Last Name </th>" +
+                      "<th> Filing Representative Business Name </th>" +
+                      "<th> Owner's Business Name </th>"
+                      )
+
 HTML_ENT_LIST_COLS = ("<th>Bin </th> <th> Address </th> " +
                       "<th> Boro </th>" +
                       "<th> Applicant First Name </th> " +

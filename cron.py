@@ -132,14 +132,14 @@ def cron_run(testing=False, time_diff=1):
             # s >> LIST OF DICTS, each dict is a match record
             emi.send_email_html(
                 email_body_raw_data=result,
-                cols=constants.SIMPLE_ENTITY_COLS,
+                cols=constants.AUG_24_EMAIL_COLS,
                 recipient_email=email_add,
                 no_results=no_results
             )
             if di['email_address'] == "holden@hrgcap.com":
                 emi.send_email_html(
                     email_body_raw_data=result,
-                    cols=constants.SIMPLE_ENTITY_COLS,
+                    cols=constants.AUG_24_EMAIL_COLS,
                     recipient_email="drborcich@gmail.com",
                     no_results=no_results,
                     email_subject=">> HRG COPY"

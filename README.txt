@@ -14,3 +14,5 @@ root folder ("backend").
 pip install -r requirements.txt
 2. Run with (in backend folder):
 gunicorn --workers=2 app:app
+
+Troubleshooting
