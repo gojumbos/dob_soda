@@ -264,8 +264,9 @@ class EmailInterface:
             with a.tr():
                 for k in sorted_keys:
                     if k in ['filing_date', 'created_at', 'current_status_date', 'permit_issue_date']:
-                        dt = dateutil.parser.parse(row[k])
-                        row[k] = datetime.strftime(dt, '%m-%d-%Y %H:%M')
+                        if row[k] and row[k] != constants.NULL:
+                            dt = dateutil.parser.parse(row[k])
+                            row[k] = datetime.strftime(dt, '%m-%d-%Y %H:%M')
                         # row[k] = row[k][:10]
                     a.td(_t=row[k])
 
