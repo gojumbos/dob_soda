@@ -22,13 +22,6 @@ import soda
 import cron
 import constants
 
-""" New 6.19 """
-# api routes
-import routes
-#
-# frontend_folder = os.path.join(os.getcwd(),"..","frontend")
-# dist_folder = os.path.join(frontend_folder,"dist")
-
 
 class AppController:
     def __init__(self, dev_server=False,
@@ -95,7 +88,7 @@ def home():  # put application's code here
         css_content = css_file.read()
 
     # 8/15
-    link = app_controller.CURR_ENV_LINK_LIT
+    link = app_controller.CURR_ENV_LINK_LIT + "get_favicon"
 
     return flask.render_template('index.html',
                                  js_content=js_content,
