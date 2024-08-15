@@ -104,7 +104,7 @@ def api_home():  # put application's code here
 
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),'favicon.ico', mimetype='image/vnd.microsoft.icon')
+    return send_from_directory(os.path.join(app.instance_path, 'static'),'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 # soda
 @app.route('/api/soda_get_update', methods=['GET'])
