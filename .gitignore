@@ -1,6 +1,6 @@
 .env
 2024*
-__pycache__
+__pycache__/
 testing.py
 sandbox.py
 debug.py

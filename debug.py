@@ -9,6 +9,8 @@ from flask import make_response, jsonify
 import supa
 from app import AppController
 
+import cron
+
 
 email = 'holden@hrgcap.com'
 password = 'hrg'
@@ -19,6 +21,9 @@ app_ = app_controller.app_object
 # logger = logging.getLogger('logger')
 load_dotenv()
 
+cron.cron_run()
+
+assert False
 
 # supabase.auth.set_session(access_token=access_token, refresh_token=refresh_token)
 

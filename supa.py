@@ -60,6 +60,8 @@ class SupaClientWrapper:
         TAKE ENTIRE ~soda~ ROW (not for build)
         *** 7/29 >> return soda data, not supa
         """
+        if soda_data_dict == []:
+            return {}, {}
         build_res, ent_res = {}, {}
         # build_keys = constants.BUILD_LIST_COLS
         # build_keys = [x for x in build_keys if x != "user_id"]
@@ -127,6 +129,8 @@ class SupaClientWrapper:
     def write_yday_to_persist(self, data_dict=None):
         """ write data update to persist table """
         """ SERVICE ROLE! """
+        if data_dict == []:
+            return 200
         data, code = self.service_add_item_to_table(data_list_dicts=data_dict,
                                                     table_name='job_apps_persist')
         # if code != 200:
@@ -138,6 +142,8 @@ class SupaClientWrapper:
         """ delete and update table """
         """ delete all columns - (where id != -1) """
         """ INSERT: list of dicts """
+        if data_dict == []:
+            return 200, 200
 
         response1 = (self.sb_client.table("job_apps_yesterday")
                     .delete()
