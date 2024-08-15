@@ -70,3 +70,5 @@ NULL = "NULL"
 HOME_URL_DEV = 'http://127.0.0.1:8000/api'
 HOME_URL_PROD = 'https://clownfish-app-8om3z.ondigitalocean.app/dob-soda2/api'
 
+HOME_URL_LIT_SEL = {'dev': HOME_URL_DEV, 'prod': HOME_URL_PROD}
+

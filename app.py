@@ -40,6 +40,8 @@ class AppController:
         self.supa_wrapper = supa_wrapper
 
         self.no_fly_list = {}  # cookies
+        self.curr_env_ind = None  # indicator
+        self.CURR_ENV_LIT = None
 
     def add_to_no_fly_list(self, token=""):
         self.no_fly_list[token] = None
@@ -76,12 +78,13 @@ def home():  # put application's code here
     #     if app_controller.is_on_no_fly_list(token):
     #         return "", 500
     """"""
-    curr_env = os.getenv('CURR_ENV')  # dev/prod
+    app_controller.curr_env = os.getenv('CURR_ENV')  # dev/prod
+    app_controller.CURR_ENV_LIT = constants.HOME_URL_LIT_SEL[app_controller.curr_env]
     """ js """
     js_path = os.path.join(app.static_folder, 'js', 'main.js')
     with open(js_path, 'r') as js_file:
         js_content = js_file.read()
-        if curr_env == 'dev':
+        if app_controller.curr_env == 'dev':
             js_content = js_content.replace('999_', constants.HOME_URL_DEV)
         else:
             js_content = js_content.replace('999_', constants.HOME_URL_PROD)
@@ -102,9 +105,10 @@ def api_home():  # put application's code here
     #         return "", 500
     return flask.render_template('index.html')
 
-# @app.route('/favicon.ico')
-# def favicon():
-#     return send_from_directory(os.path.join(app.instance_path, 'static'),'favicon.ico', mimetype='image/vnd.microsoft.icon')
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),'favicon.ico',
+                               mimetype='image/vnd.microsoft.icon')
 
 # soda
 @app.route('/api/soda_get_update', methods=['GET'])
