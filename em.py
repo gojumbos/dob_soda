@@ -245,8 +245,12 @@ class EmailInterface:
 
     def template_table_js(self, raw_data=None, cols=None,
                           ):
-        """ sort the keys for consistency! """
+        """ sort the keys for consistency!
+         raw_data = list[dict]
+         """
         a = Airium(source_line_break_character="")
+        if raw_data == []:  # 8/15/24
+            return "<div> No data posted. </div>"
         if not cols:
             sorted_keys = sorted(list(raw_data[0].keys()))
             # DANGER
