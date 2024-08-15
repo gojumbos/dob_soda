@@ -41,7 +41,7 @@ class AppController:
 
         self.no_fly_list = {}  # cookies
         self.curr_env_ind = None  # indicator
-        self.CURR_ENV_LIT = None
+        self.CURR_ENV_LINK_LIT = None
 
     def add_to_no_fly_list(self, token=""):
         self.no_fly_list[token] = None
@@ -79,7 +79,7 @@ def home():  # put application's code here
     #         return "", 500
     """"""
     app_controller.curr_env = os.getenv('CURR_ENV')  # dev/prod
-    app_controller.CURR_ENV_LIT = constants.HOME_URL_LIT_SEL[app_controller.curr_env]
+    app_controller.CURR_ENV_LINK_LIT = constants.HOME_URL_LIT_SEL[app_controller.curr_env]
     """ js """
     js_path = os.path.join(app.static_folder, 'js', 'main.js')
     with open(js_path, 'r') as js_file:
@@ -93,9 +93,16 @@ def home():  # put application's code here
     css_path = os.path.join(app.static_folder, 'css', 'styles.css')
     with open(css_path, 'r') as css_file:
         css_content = css_file.read()
+
+    # 8/15
+    link = app_controller.CURR_ENV_LINK_LIT
+
     return flask.render_template('index.html',
                                  js_content=js_content,
-                                 css_content=css_content)
+                                 css_content=css_content,
+                                 fav_link=link
+                                 )
+
 
 @app.route('/api', methods=['GET'])
 def api_home():  # put application's code here
@@ -105,10 +112,12 @@ def api_home():  # put application's code here
     #         return "", 500
     return flask.render_template('index.html')
 
-@app.route('/favicon.ico')
+
+@app.route('/api/get_favicon')  # name change?
 def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),'favicon.ico',
-                               mimetype='image/vnd.microsoft.icon')
+    app.logger.error('FAVICON__')
+    return app.send_static_file('favicon.ico')
+
 
 # soda
 @app.route('/api/soda_get_update', methods=['GET'])
