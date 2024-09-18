@@ -21,7 +21,7 @@ app_ = app_controller.app_object
 # logger = logging.getLogger('logger')
 load_dotenv()
 
-cron.cron_run()
+cron.cron_run(testing=True)
 
 assert False
 

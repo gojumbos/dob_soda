@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link id="fav" rel="icon" href="{{ fav_link }}" type="image/x-icon" />
+    <title>NYCTx Scaffolding</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container:hover {
+            transform: scale(1.02); /* Slightly enlarge the container */
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Add a shadow effect on hover */
+        }
+
+        .content {
+            flex: 1;
+            margin-right: 20px;
+            padding: 20px;
+            border: 1px solid black; /* Thin black border */
+            border-radius: 10px; /* Rounded corners */
+            background-color: #f2f2f2; /* Background color inside the box */
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Adding shadow */
+        }
+
+
+        h1 {
+            color: #59CFFF;
+        }
+
+        p {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>Welcome to NYCTx Scaffolding Tracer! </h1>
+            <p>This is a simple landing page with some placeholder content. We are excited to share more details with you soon. Stay tuned for updates!</p>
+        </div>
+        <div class="image-space">
+            <img src="static/istockphoto-946082420-612x612.jpg">
+        </div>
+    </div>
+    <div></div>
+    <div class="container">
+        <div class="content">
+            <a id="home_page" href="{{ home_link }}" > Visit our home page</a>
+        </div>
+    </div>
+    <script>
+        // Add any JavaScript functionality here
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded and ready!');
+        });
+    </script>
+</body>
+<p>Copyright 2024 NYC Transactions. </p>
+</html>

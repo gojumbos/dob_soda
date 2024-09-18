@@ -295,10 +295,11 @@ class SupaClientWrapper:
          >> reload data
          """
         try:
-            res = self.sb_client.auth.get_session()
-            data = res.data
-
-            return data, 200
+            res = self.sb_client.auth.get_user(jwt=access_token)
+            # data = res.data
+            if res.user.aud == 'authenticated':
+                return "", 200
+            return "", 400
 
         except Exception as e:
             app.logger.error(e)

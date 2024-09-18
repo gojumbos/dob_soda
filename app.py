@@ -29,11 +29,11 @@ class AppController:
         self.dev_server = dev_server
         self.app_object = Flask(__name__,  # 7/9
                                 )
-        self.all_users = {}
+        self.all_users = {}  # 8/22 : token -> email
         self.supa_wrapper = supa_wrapper
 
         self.no_fly_list = {}  # cookies
-        self.curr_env_ind = None  # indicator
+        self.curr_env = None  # indicator
         self.CURR_ENV_LINK_LIT = None
 
     def add_to_no_fly_list(self, token=""):
@@ -42,19 +42,35 @@ class AppController:
     def is_on_no_fly_list(self, token=""):
         return token in self.no_fly_list
 
+    def has_token(self, token=""):
+        # jwt exists
+        return token in self.all_users
+
     def add_logged_in_user(self, email: str, access_token):
-        """ replace if existing """
-        if email not in self.all_users:
-            self.all_users[email] = access_token
-            # self.app_object.logger.info(str(email), "Added")
+        """ replace if existing
+        8/22
+         """
+        # if email not in self.all_users:
+        #     self.all_users[email] = access_token
+        # else:
+        #     self.app_object.logger.warning(f'MULTIPLE SESSIONS FOR {email}')
+        #     self.all_users[email] = access_token
+
+        if access_token not in self.all_users:
+            self.all_users[access_token] = email
         else:
             self.app_object.logger.warning(f'MULTIPLE SESSIONS FOR {email}')
-            self.all_users[email] = access_token
+            self.all_users[access_token] = email
 
-    def remove_logged_in_user(self, email: str):
+    def remove_logged_in_user(self, token: str):
         assert type(self.supa_wrapper) is supa.SupaClientWrapper
         self.supa_wrapper.sb_client.auth.sign_out()
-        self.all_users.pop(email)
+        self.all_users.pop(token)
+
+
+    def  get_logged_in_email_from_token(self, token: str):
+        return self.all_users.get(token) if token in self.all_users else ""
+
 
 """ END APP CLASS """
 sw = supa.SupaClientWrapper()
@@ -63,13 +79,35 @@ app = app_controller.app_object
 logger = logging.getLogger('logger')
 load_dotenv()
 
-
 @app.route('/', methods=['GET'])
-def home():  # put application's code here
+def landing_page():
+    """ remove 'api' from home links """
+    app_controller.curr_env = os.getenv('CURR_ENV')  # dev/prod
+    app_controller.CURR_ENV_LINK_LIT = constants.HOME_URL_LIT_SEL[app_controller.curr_env]
+    fav_link = app_controller.CURR_ENV_LINK_LIT.replace("api", "") + "static/favicon.ico"
+
+    home_link = app_controller.CURR_ENV_LINK_LIT.replace("api", "") + "home"
+
+    return render_template('landing.html',
+                           home_link=home_link,
+                           fav_link=fav_link,)
+
+# @app.route('/', methods=['GET'])
+@app.route('/home', methods=['GET'])
+def home():
     # token = request.cookies['cookie1']
     # if token:
     #     if app_controller.is_on_no_fly_list(token):
     #         return "", 500
+    """ """
+    # token = request.cookies['cookie1'] if 'cookie1' in request.cookies else None
+    # if token:
+    #     if app_controller.has_token(token=token):
+    #         """ double check; if logged in, return data table """
+    #         if check_log_in(access_token=token,):
+    #             # call API endpoint *function* directly
+    #             return get_user_data(active=True, token=token)
+
     """"""
     app_controller.curr_env = os.getenv('CURR_ENV')  # dev/prod
     app_controller.CURR_ENV_LINK_LIT = constants.HOME_URL_LIT_SEL[app_controller.curr_env]
@@ -88,7 +126,7 @@ def home():  # put application's code here
         css_content = css_file.read()
 
     # 8/15
-    link = app_controller.CURR_ENV_LINK_LIT + "get_favicon"
+    link = app_controller.CURR_ENV_LINK_LIT.replace("api", "") + "static/favicon.ico"
 
     return flask.render_template('index.html',
                                  js_content=js_content,
@@ -97,13 +135,19 @@ def home():  # put application's code here
                                  )
 
 
-@app.route('/api', methods=['GET'])
-def api_home():  # put application's code here
-    # token = request.cookies['cookie1']
-    # if token:
-    #     if app_controller.is_on_no_fly_list(token):
-    #         return "", 500
-    return flask.render_template('index.html')
+def check_log_in(access_token: str):
+    """ check if request contains cookies from an
+    existing user session. return True if so, else False
+    """
+    app_ = app
+    supa_wrapper = app_controller.supa_wrapper
+    # delete me
+    text, code = supa_wrapper.check_user_session(access_token=access_token,
+                                                 app=app_
+                                               )
+    app_controller.app_object.logger.warning("checklogin", code, text)
+    return True if code == 200 else False
+
 
 
 @app.route('/api/get_favicon')  # name change?
@@ -224,13 +268,13 @@ def login():
 
 @app.route('/api/get_user_data', methods=['POST'])
 def get_user_data():
-
+    # if not active:  # fresh log in from client
     data = request.get_json()
     token = request.cookies['cookie1']
     email = data.get('email')  # error
-    # apc = AppController()
-
-    # local_token = app_controller.all_users[email]
+    # else:
+    #     token = token
+    #     email = app_controller.get_logged_in_email_from_token(token=token)
 
     app_c = app
     supa_wrapper = app_controller.supa_wrapper
@@ -245,9 +289,7 @@ def get_user_data():
     html = prepare_data_table(input_text=text)
 
     if code == 200:
-        # response = jsonify(html), 200
         response = str(html), 200
-        # app_c.logger.info(response)
         return response
     else:
         response = jsonify({'message': 'Request failed'}), 401

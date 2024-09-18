@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+{#<script>#}
+{#    var img = document.createElement("img");#}
+{#    img.src = "http://www.google.com/intl/en_com/images/logo_plain.png";#}
+{#    var src = document.getElementById("fav");#}
+{#    src.appendChild(img);#}
+{#</script>#}
 <head>
     <title> NYCT - Scaffolding </title>
     <meta charset="UTF-8">
@@ -9,7 +15,7 @@
     <style>
          {{ css_content | safe }}
     </style>
-    <link rel="icon" href="{{ fav_link }}" type="image/x-icon" />
+    <link id="fav" rel="icon" href="{{ fav_link }}" type="image/x-icon" />
 </head>
 <body id="the-body">
     <form>
@@ -84,6 +90,9 @@
     <div id="low-anchor"></div>
     <script>
         {{ js_content | safe }}
+    </script>
+    <script>
+        homePageAndDataFetch();
     </script>
 </body>
 </html>

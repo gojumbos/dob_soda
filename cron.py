@@ -32,7 +32,8 @@ def dob_get_new_data(date_pre, date_post, token, logger=None,
     soql2 = f'$where=current_status_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
 
     file_type = 'json'  # json
-    url = f'https://data.cityofnewyork.us/resource/w9ak-ipjd.{file_type}' + soql1 + soql2
+    limit = f'&$limit={5000}'
+    url = f'https://data.cityofnewyork.us/resource/w9ak-ipjd.{file_type}' + soql1 + soql2 + limit
     headers = {'X-App-Token': token}
 
     # task = asyncio.create_task(make_request(url=url, headers=headers))
@@ -146,3 +147,7 @@ def cron_run(testing=False, time_diff=1):
                 )
 
     return 200
+
+
+if __name__ == "__main__":
+    cron_run(testing=False, time_diff=3)
