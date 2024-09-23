@@ -159,8 +159,8 @@ def cron_run(testing=False, time_diff=1, ecb=False, write=False,):
                     no_results=no_results,
                     email_subject=">> HRG COPY"
                 )
-
-    return 200, soda_data_dict
+    j = json.JSONEncoder()
+    return 200, j.encode(o=soda_data_dict,)
 
 
 # if __name__ == "__main__":

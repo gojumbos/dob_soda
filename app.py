@@ -168,7 +168,6 @@ def soda_check_update():
     if phrase != os.getenv('CRON_KEY'):
         return jsonify({'message': 'Request failed'}), 400
     data = cron.cron_run()
-
     return data, 200
 
 
