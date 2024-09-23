@@ -10,7 +10,12 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #333;
+            {#background-color: #666565;#}
+            {##}
+            {#background-image: url("static/tiles_purple.png");#}
+            {#background-size: 28%;#}
+            {#background-repeat: repeat;#}
+
         }
 
         .container {
@@ -20,10 +25,13 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+
         }
         .container:hover {
             transform: scale(1.02); /* Slightly enlarge the container */
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Add a shadow effect on hover */
+            {#background-color: #525050;#}
+            background-color: black;
         }
 
         .content {
@@ -32,13 +40,24 @@
             padding: 20px;
             border: 1px solid black; /* Thin black border */
             border-radius: 10px; /* Rounded corners */
-            background-color: #f2f2f2; /* Background color inside the box */
+            background-color: #faf9f0; /* Background color inside the box */
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Adding shadow */
         }
 
+        .content:hover {
+            transform: scale(1.02); /* Slightly enlarge the container */
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3); /* Add a shadow effect on hover */
+            {#background-color: #525050;#}
+        }
+
+        .img-obj:hover {
+            transform: scale(1.02); /* Slightly enlarge the container */
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
 
         h1 {
-            color: #59CFFF;
+            color: #6832e6;
+            text-shadow: 2px 2px 4px #dddae0;
         }
 
         p {
@@ -50,16 +69,16 @@
     <div class="container">
         <div class="content">
             <h1>Welcome to NYCTx Scaffolding Tracer! </h1>
-            <p>This is a simple landing page with some placeholder content. We are excited to share more details with you soon. Stay tuned for updates!</p>
+            <p> We are excited to share more details with you soon. Please stay tuned for updates!</p>
         </div>
         <div class="image-space">
-            <img src="static/istockphoto-946082420-612x612.jpg">
+            <img src="static/istockphoto-946082420-612x612.jpg" class="img-obj">
         </div>
     </div>
     <div></div>
     <div class="container">
         <div class="content">
-            <a id="home_page" href="{{ home_link }}" > Visit our home page</a>
+            <a id="home_page" href="{{ home_link }}" > Visit our login page</a>
         </div>
     </div>
     <script>
@@ -67,7 +86,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Page loaded and ready!');
         });
+
     </script>
 </body>
-<p>Copyright 2024 NYC Transactions. </p>
+<div></div>
+<footer style="text-align: center; color: #333"> Copyright 2024 NYC Transactions. </footer>
 </html>

@@ -1,56 +1,40 @@
 <!DOCTYPE html><html><head>    <meta charset="UTF-8">    <title>Email Template</title>    <style>        body {            font-family: Arial, sans-serif;            line-height: 1.6;        }        .container {            width: 80%;            margin: 0 auto;            padding: 20px;            border: 1px solid #ccc;            background-color: #f9f9f9;        }        h1 {            text-align: center;            color: #333;        }        table {            width: 100%;            border-collapse: collapse;            margin: 20px 0;        }        th, td {            border: 1px solid #ccc;            padding: 10px;            text-align: left;        }        th {            background-color: #f2f2f2;        }        .footer {            text-align: center;            margin-top: 20px;            font-size: 0.9em;            color: #666;        }    </style></head><body>    <div class="container">        <h1>Email Report</h1>        <p>Dear Recipient,</p>        <p>The below data from this morning's update was found to match items you are tracking:  </p>        <table>            <thead>                <tr>                    <th> Address </th> <th> Boro </th><th> Applicant First Name </th> <th> Applicant Last Name </th><th> Filing Representative Business Name </th><th> Owner's Business Name </th>                </tr>            </thead>            <tbody>                <tr>
-  <td>200 KENT AVENUE</td>
+  <td>271 VAN SICLEN AVENUE</td>
   <td>BROOKLYN</td>
   <td>tarek</td>
   <td>zeid</td>
   <td>JMV ASSOCIATES LLC</td>
-  <td>RED ROCK OUTDOOR</td>
+  <td>TWIN RENO CORP</td>
 </tr>
 <tr>
-  <td>100 NOLL STREET</td>
+  <td>883 CLASSON AVENUE</td>
   <td>BROOKLYN</td>
-  <td>KHALIDA</td>
-  <td>ERKIN</td>
+  <td>David</td>
+  <td>Kriegel</td>
   <td>JMV ASSOCIATES LLC</td>
   <td>NYC SCHOOL CONSTRUCTION AUTHORITY</td>
 </tr>
 <tr>
-  <td>378 SENECA AVENUE</td>
-  <td>QUEENS</td>
-  <td>ARKADIUSZ</td>
-  <td>CZERW</td>
-  <td>JMV ASSOCIATES LLC</td>
-  <td>NYC SCHOOL CONSTRUCTION AUTHORITY</td>
-</tr>
-<tr>
-  <td>2170 AQUEDUCT AVENUE</td>
-  <td>BRONX</td>
-  <td>SUSAN</td>
-  <td>BACAS</td>
-  <td>JMV ASSOCIATES LLC</td>
-  <td>NYC SCA</td>
-</tr>
-<tr>
-  <td>378 SENECA AVENUE</td>
-  <td>QUEENS</td>
-  <td>HUZEFA</td>
-  <td>IRFANI</td>
-  <td>JMV ASSOCIATES LLC</td>
-  <td>NYC SCHOOL CONSTRUCTION AUTHORITY</td>
-</tr>
-<tr>
-  <td>100 NOLL STREET</td>
+  <td>883 CLASSON AVENUE</td>
   <td>BROOKLYN</td>
-  <td>SILVIAN</td>
-  <td>MARCUS</td>
+  <td>AHMED</td>
+  <td>SOLIMAN</td>
   <td>JMV ASSOCIATES LLC</td>
   <td>NYC SCHOOL CONSTRUCTION AUTHORITY</td>
 </tr>
 <tr>
-  <td>4012 FORT HAMILTON PARKWAY</td>
+  <td>883 CLASSON AVENUE</td>
   <td>BROOKLYN</td>
-  <td>Jitendra</td>
-  <td>Agarwal</td>
+  <td>David</td>
+  <td>Kriegel</td>
+  <td>JMV ASSOCIATES LLC</td>
+  <td>NYC SCHOOL CONSTRUCTION AUTHORITY</td>
+</tr>
+<tr>
+  <td>883 CLASSON AVENUE</td>
+  <td>BROOKLYN</td>
+  <td>AHMED</td>
+  <td>SOLIMAN</td>
   <td>JMV ASSOCIATES LLC</td>
   <td>NYC SCHOOL CONSTRUCTION AUTHORITY</td>
 </tr>
@@ -63,36 +47,68 @@
   <td>99-02 NORTHERN BOULEVARD</td>
 </tr>
 <tr>
-  <td>200 KENT AVENUE</td>
+  <td>99-02 NORTHERN BOULEVARD</td>
+  <td>QUEENS</td>
+  <td>tarek</td>
+  <td>zeid</td>
+  <td>JMV ASSOCIATES LLC</td>
+  <td>99-02 NORTHERN BOULEVARD</td>
+</tr>
+<tr>
+  <td>66-26 METROPOLITAN AVENUE</td>
+  <td>QUEENS</td>
+  <td>Scott</td>
+  <td>Loikits</td>
+  <td>JMV ASSOCIATES LLC</td>
+  <td>VERTICAL INDUSTRIAL PARK ASSOCIATES</td>
+</tr>
+<tr>
+  <td>2 COURT SQUARE</td>
+  <td>QUEENS</td>
+  <td>Nicholas</td>
+  <td>Kumbatovic</td>
+  <td>JMV ASSOCIATES LLC</td>
+  <td>CITY UNIVERSITY OF NEW YORK</td>
+</tr>
+<tr>
+  <td>259 SHARPE AVENUE</td>
+  <td>STATEN ISLAND</td>
+  <td>tarek</td>
+  <td>zeid</td>
+  <td>JMV ASSOCIATES LLC</td>
+  <td>PR</td>
+</tr>
+<tr>
+  <td>325 BUSHWICK AVENUE</td>
+  <td>BROOKLYN</td>
+  <td>JEFFREY</td>
+  <td>FICK</td>
+  <td>JMV ASSOCIATES LLC</td>
+  <td>NYC SCHOOL CONSTRUCTION AUTHORITY</td>
+</tr>
+<tr>
+  <td>840 ANNADALE ROAD</td>
+  <td>STATEN ISLAND</td>
+  <td>ANTHONY</td>
+  <td>WEBER</td>
+  <td>JMV ASSOCIATES LLC</td>
+  <td>NYC PARKS & RECREATION</td>
+</tr>
+<tr>
+  <td>271 VAN SICLEN AVENUE</td>
   <td>BROOKLYN</td>
   <td>tarek</td>
   <td>zeid</td>
   <td>JMV ASSOCIATES LLC</td>
-  <td>RED ROCK OUTDOOR</td>
+  <td>TWIN RENO CORP</td>
 </tr>
 <tr>
-  <td>41-50 47 STREET</td>
+  <td>88-40 179 PLACE</td>
   <td>QUEENS</td>
-  <td>tarek</td>
-  <td>zeid</td>
-  <td>JME BUILDING CONSULTING, LLC</td>
-  <td>Not Applicable</td>
-</tr>
-<tr>
-  <td>555 SHORT AVENUE</td>
-  <td>MANHATTAN</td>
   <td>tarek</td>
   <td>zeid</td>
   <td>J.M.V. ASSOCIATES, LLC</td>
-  <td>THE TRUST FOR GOVERNORS ISLAND</td>
-</tr>
-<tr>
-  <td>555 SHORT AVENUE</td>
-  <td>MANHATTAN</td>
-  <td>tarek</td>
-  <td>zeid</td>
-  <td>J.M.V. ASSOCIATES, LLC</td>
-  <td>THE TRUST FOR GOVERNORS ISLAND</td>
+  <td>NYC SCHOOL CONSTRUCTION AUTHORITY</td>
 </tr>
 <tr>
   <td>99-02 NORTHERN BOULEVARD</td>
@@ -103,260 +119,244 @@
   <td>99-02 NORTHERN BOULEVARD</td>
 </tr>
 <tr>
-  <td>467 10 AVENUE</td>
-  <td>MANHATTAN</td>
-  <td>DIEGO</td>
-  <td>ERAS</td>
-  <td>D.R. BROWN CO., INC</td>
-  <td>--</td>
+  <td>99-02 NORTHERN BOULEVARD</td>
+  <td>QUEENS</td>
+  <td>tarek</td>
+  <td>zeid</td>
+  <td>JMV ASSOCIATES LLC</td>
+  <td>99-02 NORTHERN BOULEVARD</td>
 </tr>
 <tr>
-  <td>838 7 AVENUE</td>
-  <td>MANHATTAN</td>
+  <td>259 SHARPE AVENUE</td>
+  <td>STATEN ISLAND</td>
+  <td>tarek</td>
+  <td>zeid</td>
+  <td>JMV ASSOCIATES LLC</td>
+  <td>PR</td>
+</tr>
+<tr>
+  <td>88-40 179 PLACE</td>
+  <td>QUEENS</td>
+  <td>tarek</td>
+  <td>zeid</td>
+  <td>J.M.V. ASSOCIATES, LLC</td>
+  <td>NYC SCHOOL CONSTRUCTION AUTHORITY</td>
+</tr>
+<tr>
+  <td>10-02 CLINTONVILLE STREET</td>
+  <td>QUEENS</td>
   <td>Richard</td>
   <td>Wainer</td>
   <td>D.R. BROWN CO., INC</td>
-  <td>Acadia Realty Trust</td>
+  <td>MAFJ CLINTONVILLE DONUTS LLC</td>
 </tr>
 <tr>
-  <td>51 ASH STREET</td>
+  <td>20 BRUCKNER BOULEVARD</td>
+  <td>BRONX</td>
+  <td>RENEE</td>
+  <td>RAJAPPA</td>
+  <td>D.R. BROWN CO., INC</td>
+  <td>YYY 62ND STREET LLC</td>
+</tr>
+<tr>
+  <td>34 NORMAN AVENUE</td>
   <td>BROOKLYN</td>
-  <td>Russell</td>
-  <td>Lewis</td>
+  <td>RENEE</td>
+  <td>RAJAPPA</td>
   <td>BUILDING BROTHERS INC.</td>
-  <td>PR</td>
+  <td>OUT OF HOME HOLDINGS, LLC</td>
 </tr>
 <tr>
-  <td>51 ASH STREET</td>
+  <td>34 NORMAN AVENUE</td>
   <td>BROOKLYN</td>
-  <td>Russell</td>
-  <td>Lewis</td>
+  <td>RENEE</td>
+  <td>RAJAPPA</td>
   <td>BUILDING BROTHERS INC.</td>
-  <td>PR</td>
+  <td>OUT OF HOME HOLDINGS, LLC</td>
 </tr>
 <tr>
-  <td>75-44 MAIN STREET</td>
-  <td>QUEENS</td>
+  <td>6510 FORT HAMILTON PARKWAY</td>
+  <td>BROOKLYN</td>
   <td>LEON</td>
   <td>SKVIRSKY</td>
   <td>BUILDING BROTHERS INC.</td>
-  <td>FLAGSTAR BANK, N.A.</td>
+  <td>ANSELMO S. GENOVESE ARCHITECT PC</td>
 </tr>
 <tr>
-  <td>12 WEST   19 STREET</td>
-  <td>MANHATTAN</td>
-  <td>ADITYA</td>
-  <td>DESAI</td>
-  <td>LOUIS STRIAR INC.</td>
-  <td>366 WILLIS LLC</td>
-</tr>
-<tr>
-  <td>529 PRESIDENT STREET</td>
+  <td>1908 CONEY ISLAND AVENUE</td>
   <td>BROOKLYN</td>
   <td>MOHAMMAD</td>
   <td>AHEAD</td>
   <td>LOUIS STRIAR INC.</td>
-  <td>RJ HOSPITALITY LIMITED LIABILITY CO</td>
+  <td>Sas Associates</td>
 </tr>
 <tr>
-  <td>35-32 LEAVITT STREET</td>
-  <td>QUEENS</td>
-  <td>NORMAN</td>
-  <td>LOK</td>
+  <td>1573 3 AVENUE</td>
+  <td>MANHATTAN</td>
+  <td>Ryan</td>
+  <td>Hung</td>
   <td>LOUIS STRIAR INC.</td>
-  <td>CENTURY DEVELOPMENT GROUP</td>
+  <td>1571-1573 THIRD AVENUE LLC</td>
 </tr>
 <tr>
-  <td>247 WEST   35 STREET</td>
+  <td>401 WEST   42 STREET</td>
+  <td>MANHATTAN</td>
+  <td>BIANCA</td>
+  <td>SKVIRSKY</td>
+  <td>LOUIS STRIAR INC.</td>
+  <td>RELATED MANAGEMENT COMPANY</td>
+</tr>
+<tr>
+  <td>401 WEST   42 STREET</td>
+  <td>MANHATTAN</td>
+  <td>BIANCA</td>
+  <td>SKVIRSKY</td>
+  <td>LOUIS STRIAR INC.</td>
+  <td>RELATED MANAGEMENT COMPANY</td>
+</tr>
+<tr>
+  <td>401 WEST   42 STREET</td>
+  <td>MANHATTAN</td>
+  <td>BIANCA</td>
+  <td>SKVIRSKY</td>
+  <td>LOUIS STRIAR INC.</td>
+  <td>RELATED MANAGEMENT COMPANY</td>
+</tr>
+<tr>
+  <td>401 WEST   42 STREET</td>
+  <td>MANHATTAN</td>
+  <td>BIANCA</td>
+  <td>SKVIRSKY</td>
+  <td>LOUIS STRIAR INC.</td>
+  <td>RELATED MANAGEMENT COMPANY</td>
+</tr>
+<tr>
+  <td>401 WEST   42 STREET</td>
+  <td>MANHATTAN</td>
+  <td>BIANCA</td>
+  <td>SKVIRSKY</td>
+  <td>LOUIS STRIAR INC.</td>
+  <td>RELATED MANAGEMENT COMPANY</td>
+</tr>
+<tr>
+  <td>401 WEST   42 STREET</td>
+  <td>MANHATTAN</td>
+  <td>BIANCA</td>
+  <td>SKVIRSKY</td>
+  <td>LOUIS STRIAR INC.</td>
+  <td>RELATED MANAGEMENT COMPANY</td>
+</tr>
+<tr>
+  <td>285 WEST  110 STREET</td>
   <td>MANHATTAN</td>
   <td>GHANENDRA</td>
   <td>MISHRA</td>
   <td>LOUIS STRIAR INC.</td>
-  <td>PR</td>
+  <td>--</td>
 </tr>
 <tr>
-  <td>111 RIVINGTON STREET</td>
+  <td>285 WEST  110 STREET</td>
   <td>MANHATTAN</td>
-  <td>ADITYA</td>
-  <td>DESAI</td>
+  <td>GHANENDRA</td>
+  <td>MISHRA</td>
   <td>LOUIS STRIAR INC.</td>
-  <td>1204 BROADWAY DE LLC</td>
+  <td>--</td>
 </tr>
 <tr>
-  <td>39-21 JANET PLACE</td>
+  <td>10-64 JACKSON AVENUE</td>
   <td>QUEENS</td>
-  <td>bassam (sam)</td>
-  <td>rimawi</td>
+  <td>MOHAMMAD</td>
+  <td>AHEAD</td>
+  <td>LOUIS STRIAR INC.</td>
+  <td>BK BUILDERS LLC</td>
+</tr>
+<tr>
+  <td>2656 HYLAN BOULEVARD</td>
+  <td>STATEN ISLAND</td>
+  <td>BIANCA</td>
+  <td>SKVIRSKY</td>
+  <td>LOUIS STRIAR INC.</td>
+  <td>PR</td>
+</tr>
+<tr>
+  <td>2401 WHITE PLAINS ROAD</td>
+  <td>BRONX</td>
+  <td>GHANENDRA</td>
+  <td>MISHRA</td>
+  <td>LOUIS STRIAR INC.</td>
+  <td>CENTERLIGHT</td>
+</tr>
+<tr>
+  <td>2401 WHITE PLAINS ROAD</td>
+  <td>BRONX</td>
+  <td>GHANENDRA</td>
+  <td>MISHRA</td>
+  <td>LOUIS STRIAR INC.</td>
+  <td>CENTERLIGHT</td>
+</tr>
+<tr>
+  <td>160 EAST   89 STREET</td>
+  <td>MANHATTAN</td>
+  <td>Ann</td>
+  <td>Macklin</td>
   <td>JENNY FLORES EXPEDITING</td>
   <td>PR</td>
 </tr>
 <tr>
-  <td>333 HUDSON STREET</td>
+  <td>345 WEST   70 STREET</td>
   <td>MANHATTAN</td>
-  <td>Andrea</td>
-  <td>Harris</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>WHITEHALL HUDSON LLC</td>
-</tr>
-<tr>
-  <td>84-06 REAR 102 ROAD</td>
-  <td>QUEENS</td>
-  <td>Robert</td>
-  <td>Papazian</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>WORKSMAN TRADING CORP</td>
-</tr>
-<tr>
-  <td>8429 108 STREET</td>
-  <td>QUEENS</td>
-  <td>Stephen</td>
-  <td>Shishko</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>PR</td>
-</tr>
-<tr>
-  <td>53 EAST   10 STREET</td>
-  <td>MANHATTAN</td>
-  <td>Serge</td>
-  <td>Drouin</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>MAISON GERARD LTD</td>
-</tr>
-<tr>
-  <td>53 EAST   10 STREET</td>
-  <td>MANHATTAN</td>
-  <td>Serge</td>
-  <td>Drouin</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>MAISON GERARD LTD</td>
-</tr>
-<tr>
-  <td>531 MAIN STREET</td>
-  <td>MANHATTAN</td>
-  <td>Dionisio</td>
-  <td>Cortes Ortega</td>
+  <td>Jieun</td>
+  <td>Yang</td>
   <td>JENNY FLORES EXPEDITING</td>
   <td>--</td>
 </tr>
 <tr>
-  <td>184 LEXINGTON AVENUE</td>
+  <td>248 WEST   14 STREET</td>
   <td>MANHATTAN</td>
-  <td>Stephen</td>
-  <td>Shishko</td>
+  <td>DAN</td>
+  <td>CHOI</td>
   <td>JENNY FLORES EXPEDITING</td>
-  <td>HYDERABADI ZAIQA LLC</td>
+  <td>14 LLC</td>
 </tr>
 <tr>
-  <td>192 FLATBUSH AVENUE</td>
-  <td>BROOKLYN</td>
-  <td>NICHOLAS</td>
-  <td>MOSHOPOULOS</td>
+  <td>248 WEST   14 STREET</td>
+  <td>MANHATTAN</td>
+  <td>DAN</td>
+  <td>CHOI</td>
   <td>JENNY FLORES EXPEDITING</td>
-  <td>PINTCHIK</td>
+  <td>14 LLC</td>
 </tr>
 <tr>
-  <td>21-19 46 STREET</td>
+  <td>14-41 BURTON STREET</td>
   <td>QUEENS</td>
   <td>NICHOLAS</td>
   <td>MOSHOPOULOS</td>
   <td>JENNY FLORES EXPEDITING</td>
-  <td>AFJMECHANICAL INC</td>
+  <td>PREPARER</td>
 </tr>
 <tr>
-  <td>53 EAST   10 STREET</td>
-  <td>MANHATTAN</td>
-  <td>Serge</td>
-  <td>Drouin</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>MAISON GERARD LTD</td>
-</tr>
-<tr>
-  <td>53 EAST   10 STREET</td>
-  <td>MANHATTAN</td>
-  <td>Serge</td>
-  <td>Drouin</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>MAISON GERARD LTD</td>
-</tr>
-<tr>
-  <td>2424 FLATBUSH AVENUE</td>
-  <td>BROOKLYN</td>
-  <td>MAJID</td>
-  <td>JAVAHERI</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>718OUTDOOR</td>
-</tr>
-<tr>
-  <td>517 WEST   37 STREET</td>
-  <td>MANHATTAN</td>
-  <td>Jeffrey</td>
-  <td>Donahue</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>C/O TF CORNERSTONE INC.</td>
-</tr>
-<tr>
-  <td>517 WEST   37 STREET</td>
-  <td>MANHATTAN</td>
-  <td>Jeffrey</td>
-  <td>Donahue</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>C/O TF CORNERSTONE INC.</td>
-</tr>
-<tr>
-  <td>2424 FLATBUSH AVENUE</td>
-  <td>BROOKLYN</td>
-  <td>MAJID</td>
-  <td>JAVAHERI</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>718OUTDOOR</td>
-</tr>
-<tr>
-  <td>160 EAST   89 STREET</td>
-  <td>MANHATTAN</td>
-  <td>Ann</td>
-  <td>Macklin</td>
+  <td>94-10 LINDEN BOULEVARD</td>
+  <td>QUEENS</td>
+  <td>Stephen</td>
+  <td>Shishko</td>
   <td>JENNY FLORES EXPEDITING</td>
   <td>PR</td>
 </tr>
 <tr>
-  <td>45 WALKER STREET</td>
-  <td>MANHATTAN</td>
-  <td>CARLOS</td>
-  <td>RODRIGUEZ-INFANZON</td>
+  <td>45-47 40 STREET</td>
+  <td>QUEENS</td>
+  <td>GEORGE</td>
+  <td>OZAETA</td>
   <td>JENNY FLORES EXPEDITING</td>
-  <td>BUCHBINDER & WARREN LLC</td>
+  <td>--</td>
 </tr>
 <tr>
-  <td>20 EAST  110 STREET</td>
-  <td>MANHATTAN</td>
-  <td>Gheorghe</td>
-  <td>Nicolescu</td>
+  <td>42-45 12 STREET</td>
+  <td>QUEENS</td>
+  <td>Dionisio</td>
+  <td>Cortes Ortega</td>
   <td>JENNY FLORES EXPEDITING</td>
-  <td>A&R PROPERTIES GROUP</td>
-</tr>
-<tr>
-  <td>20 EAST  110 STREET</td>
-  <td>MANHATTAN</td>
-  <td>Gheorghe</td>
-  <td>Nicolescu</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>A&R PROPERTIES GROUP</td>
-</tr>
-<tr>
-  <td>160 EAST   89 STREET</td>
-  <td>MANHATTAN</td>
-  <td>Ann</td>
-  <td>Macklin</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>PR</td>
-</tr>
-<tr>
-  <td>83 4 PLACE</td>
-  <td>BROOKLYN</td>
-  <td>Lynne</td>
-  <td>Breslin</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>PR</td>
+  <td>42-45 12TH STREET LLC</td>
 </tr>
 <tr>
   <td>3847 VICTORY BOULEVARD</td>
@@ -367,12 +367,140 @@
   <td>SHS PELHAM</td>
 </tr>
 <tr>
-  <td>178 SPRING STREET</td>
-  <td>MANHATTAN</td>
-  <td>Dimitri</td>
-  <td>Papagiannakis</td>
+  <td>106 PILOT STREET</td>
+  <td>BRONX</td>
+  <td>THEODORE</td>
+  <td>RIEPER</td>
   <td>JENNY FLORES EXPEDITING</td>
-  <td>FSI</td>
+  <td>PRO PACE CONSTRUCTION INC</td>
+</tr>
+<tr>
+  <td>106 PILOT STREET</td>
+  <td>BRONX</td>
+  <td>THEODORE</td>
+  <td>RIEPER</td>
+  <td>JENNY FLORES EXPEDITING</td>
+  <td>PRO PACE CONSTRUCTION INC</td>
+</tr>
+<tr>
+  <td>494 EAST   23 STREET</td>
+  <td>BROOKLYN</td>
+  <td>Karim</td>
+  <td>Ahmed</td>
+  <td>JENNY FLORES EXPEDITING</td>
+  <td>RANCO CAPITAL LLC</td>
+</tr>
+<tr>
+  <td>160 EAST   89 STREET</td>
+  <td>MANHATTAN</td>
+  <td>Ann</td>
+  <td>Macklin</td>
+  <td>JENNY FLORES EXPEDITING</td>
+  <td>PR</td>
+</tr>
+<tr>
+  <td>91 CENTRAL PARK WEST</td>
+  <td>MANHATTAN</td>
+  <td>Mario</td>
+  <td>Mendoza Blanco</td>
+  <td>JENNY FLORES EXPEDITING</td>
+  <td>PR</td>
+</tr>
+<tr>
+  <td>57-48 MYRTLE AVENUE</td>
+  <td>QUEENS</td>
+  <td>Brendan</td>
+  <td>Kelly</td>
+  <td>JENNY FLORES EXPEDITING</td>
+  <td>DOMA INC</td>
+</tr>
+<tr>
+  <td>57-48 MYRTLE AVENUE</td>
+  <td>QUEENS</td>
+  <td>Brendan</td>
+  <td>Kelly</td>
+  <td>JENNY FLORES EXPEDITING</td>
+  <td>DOMA INC</td>
+</tr>
+<tr>
+  <td>42-45 12 STREET</td>
+  <td>QUEENS</td>
+  <td>Dionisio</td>
+  <td>Cortes Ortega</td>
+  <td>JENNY FLORES EXPEDITING</td>
+  <td>42-45 12TH STREET LLC</td>
+</tr>
+<tr>
+  <td>202 BERKELEY PLACE</td>
+  <td>BROOKLYN</td>
+  <td>Ryan</td>
+  <td>Hansen</td>
+  <td>KUSHNER STUDIOS</td>
+  <td>--</td>
+</tr>
+<tr>
+  <td>232 NORTH   12 STREET</td>
+  <td>BROOKLYN</td>
+  <td>Adam</td>
+  <td>Kushner</td>
+  <td>KUSHNER STUDIOS</td>
+  <td>DAX REAL ESTATE</td>
+</tr>
+<tr>
+  <td>148 39 STREET</td>
+  <td>BROOKLYN</td>
+  <td>Adam</td>
+  <td>Kushner</td>
+  <td>KUSHNER STUDIOS</td>
+  <td>INDUSTRY CITY</td>
+</tr>
+<tr>
+  <td>58 AVENUE A</td>
+  <td>MANHATTAN</td>
+  <td>Ryan</td>
+  <td>Hansen</td>
+  <td>KUSHNER STUDIOS</td>
+  <td>MONDAY MORNING MANAGEMENT</td>
+</tr>
+<tr>
+  <td>58 AVENUE A</td>
+  <td>MANHATTAN</td>
+  <td>Adam</td>
+  <td>Kushner</td>
+  <td>KUSHNER STUDIOS</td>
+  <td>MONDAY MORNING MANAGEMENT</td>
+</tr>
+<tr>
+  <td>58 AVENUE A</td>
+  <td>MANHATTAN</td>
+  <td>John</td>
+  <td>Bedard</td>
+  <td>KUSHNER STUDIOS</td>
+  <td>MONDAY MORNING MANAGEMENT</td>
+</tr>
+<tr>
+  <td>58 AVENUE A</td>
+  <td>MANHATTAN</td>
+  <td>Adam</td>
+  <td>Kushner</td>
+  <td>KUSHNER STUDIOS</td>
+  <td>MONDAY MORNING MANAGEMENT</td>
+</tr>
+<tr>
+  <td>58 AVENUE A</td>
+  <td>MANHATTAN</td>
+  <td>Ryan</td>
+  <td>Hansen</td>
+  <td>KUSHNER STUDIOS</td>
+  <td>MONDAY MORNING MANAGEMENT</td>
+</tr>
+<tr>
+  <td>58 AVENUE A</td>
+  <td>MANHATTAN</td>
+  <td>Ryan</td>
+  <td>Hansen</td>
+  <td>KUSHNER STUDIOS</td>
+  <td>MONDAY MORNING MANAGEMENT</td>
 </tr>
 <tr>
   <td>414 EAST    9 STREET</td>
@@ -383,7 +511,23 @@
   <td>NORTH RIVER REAL ESTATE CO</td>
 </tr>
 <tr>
-  <td>46 GREENWICH AVENUE</td>
+  <td>414 EAST    9 STREET</td>
+  <td>MANHATTAN</td>
+  <td>Adam</td>
+  <td>Kushner</td>
+  <td>KUSHNER STUDIOS</td>
+  <td>NORTH RIVER REAL ESTATE CO</td>
+</tr>
+<tr>
+  <td>22-29 90 STREET</td>
+  <td>QUEENS</td>
+  <td>ZACHARY</td>
+  <td>CHAPLIN</td>
+  <td>KUSHNER STUDIOS</td>
+  <td>BARONE MANAGEMENT</td>
+</tr>
+<tr>
+  <td>58 AVENUE A</td>
   <td>MANHATTAN</td>
   <td>Adam</td>
   <td>Kushner</td>
@@ -391,74 +535,26 @@
   <td>PR</td>
 </tr>
 <tr>
-  <td>17 GREENE AVENUE</td>
+  <td>34 NORMAN AVENUE</td>
   <td>BROOKLYN</td>
-  <td>christopher</td>
-  <td>konoski</td>
-  <td>KUSHNER STUDIOS</td>
-  <td>HJB NEW YORK LLC</td>
-</tr>
-<tr>
-  <td>15 VANDERBILT AVENUE</td>
-  <td>BROOKLYN</td>
-  <td>DAVID</td>
-  <td>KEANE</td>
-  <td>KUSHNER STUDIOS</td>
-  <td>BAL</td>
-</tr>
-<tr>
-  <td>53-03 64 STREET</td>
-  <td>QUEENS</td>
-  <td>Tyler</td>
-  <td>Caine</td>
-  <td>KUSHNER STUDIOS</td>
-  <td>THOMAS STEPHENS CONSTRUCTION INC.</td>
-</tr>
-<tr>
-  <td>213 THIRD AVENUE</td>
-  <td>BROOKLYN</td>
-  <td>Walter</td>
-  <td>Kaeck</td>
-  <td>KUSHNER STUDIOS</td>
-  <td>PR</td>
-</tr>
-<tr>
-  <td>51 ASH STREET</td>
-  <td>BROOKLYN</td>
-  <td>Russell</td>
-  <td>Lewis</td>
+  <td>RENEE</td>
+  <td>RAJAPPA</td>
   <td>BUILDING BROTHERS INC.</td>
-  <td>PR</td>
+  <td>OUT OF HOME HOLDINGS, LLC</td>
 </tr>
 <tr>
-  <td>51 ASH STREET</td>
+  <td>34 NORMAN AVENUE</td>
   <td>BROOKLYN</td>
-  <td>Russell</td>
-  <td>Lewis</td>
+  <td>RENEE</td>
+  <td>RAJAPPA</td>
   <td>BUILDING BROTHERS INC.</td>
-  <td>PR</td>
+  <td>OUT OF HOME HOLDINGS, LLC</td>
 </tr>
 <tr>
-  <td>2424 FLATBUSH AVENUE</td>
-  <td>BROOKLYN</td>
-  <td>MAJID</td>
-  <td>JAVAHERI</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>718OUTDOOR</td>
-</tr>
-<tr>
-  <td>2424 FLATBUSH AVENUE</td>
-  <td>BROOKLYN</td>
-  <td>MAJID</td>
-  <td>JAVAHERI</td>
-  <td>JENNY FLORES EXPEDITING</td>
-  <td>718OUTDOOR</td>
-</tr>
-<tr>
-  <td>200 KENT AVENUE</td>
-  <td>BROOKLYN</td>
-  <td>tarek</td>
-  <td>zeid</td>
-  <td>JMV ASSOCIATES LLC</td>
-  <td>RED ROCK OUTDOOR</td>
+  <td>20 BRUCKNER BOULEVARD</td>
+  <td>BRONX</td>
+  <td>RENEE</td>
+  <td>RAJAPPA</td>
+  <td>D.R. BROWN CO., INC</td>
+  <td>YYY 62ND STREET LLC</td>
 </tr>            </tbody>        </table>        <div class="footer">            2024 NYC Transactions. Link: https://clownfish-app-8om3z.ondigitalocean.app/dob-soda2        </div>    </div></body></html>

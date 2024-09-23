@@ -72,3 +72,7 @@ HOME_URL_PROD = 'https://clownfish-app-8om3z.ondigitalocean.app/dob-soda2/api'
 
 HOME_URL_LIT_SEL = {'dev': HOME_URL_DEV, 'prod': HOME_URL_PROD}
 
+ECB_COLS = ("ecb_violation_number,ecb_violation_status,bin,served_date,issue_date,hearing_date,violation_type,respondent_name,respondent_house_number,respondent_street,respondent_city,violation_description,penality_imposed"
+            )
+
+

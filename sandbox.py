@@ -40,12 +40,14 @@ def main(prev_step_back=1):
     # prev_step_back = 1 if prev_step_back is None else prev_step_back
     # prev_day = datetime.now() - timedelta(days=int(prev_step_back))
     today = datetime.today()
-    prev_day = datetime.now() - timedelta(days=1)
+    # prev_day = datetime.now() - timedelta(days=1)
+    # today = datetime.today() - timedelta(days=)
+    prev_day = datetime.now() - timedelta(days=3) # 9/18/24
     if today.weekday() == 0:  # if monday >> get friday
         prev_day = today - timedelta(days=3)
     token = constants.SODA_TOKEN
     # list of dicts
-    soda_data_dict = dob_get_new_data(date_pre=prev_day,
+    data = dob_get_new_data(date_pre=prev_day,
                                       date_post=today,
                                       token=token,
                                       )
@@ -57,8 +59,8 @@ def main(prev_step_back=1):
     cols = constants.DEFAULT_SODA_COLS
 
     # r.text ->
-    data = dob_get_new_data(date_post=today, date_pre=prev_day, token=token, logger=logger,
-                            cols=cols, write_to_disk=True)
+    # data = dob_get_new_data(date_post=today, date_pre=prev_day, token=token, logger=logger,
+    #                         cols=cols, write_to_disk=True)
 
     emi = em.EmailInterface(dummy=True, supa_wrapper=supa_wrapper,)
 
@@ -77,7 +79,7 @@ def main(prev_step_back=1):
 
     # partition data - by user
     # each user_id gets only the item-updates they subscribe to
-    b_dict, e_dict = supa_wrapper.check_all_tables(jay_data_list=data)
+    b_dict, e_dict = supa_wrapper.check_all_tables(soda_data_dict=data)
     # print(b_dict, e_dict)
     for b in b_dict:
         print(b, b_dict[b])

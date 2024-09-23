@@ -84,7 +84,7 @@ def landing_page():
     """ remove 'api' from home links """
     app_controller.curr_env = os.getenv('CURR_ENV')  # dev/prod
     app_controller.CURR_ENV_LINK_LIT = constants.HOME_URL_LIT_SEL[app_controller.curr_env]
-    fav_link = app_controller.CURR_ENV_LINK_LIT.replace("api", "") + "static/favicon.ico"
+    fav_link = app_controller.CURR_ENV_LINK_LIT.replace("api", "") + "static/tiles_1.jpeg"
 
     home_link = app_controller.CURR_ENV_LINK_LIT.replace("api", "") + "home"
 
@@ -167,9 +167,9 @@ def soda_check_update():
     phrase = request.headers.get('Authorization')
     if phrase != os.getenv('CRON_KEY'):
         return jsonify({'message': 'Request failed'}), 400
-    r = cron.cron_run()
+    data = cron.cron_run()
 
-    return "", 200
+    return data, 200
 
 
 

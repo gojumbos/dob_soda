@@ -6,7 +6,7 @@
 {#    var src = document.getElementById("fav");#}
 {#    src.appendChild(img);#}
 {#</script>#}
-<head>
+<head id="head">
     <title> NYCT - Scaffolding </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,8 +15,17 @@
     <style>
          {{ css_content | safe }}
     </style>
-    <link id="fav" rel="icon" href="{{ fav_link }}" type="image/x-icon" />
+    <link rel="icon"  href="static/favicon.ico" >
+{#    <link id="fav" rel="icon" href="{{ fav_link }}" type="image/x-icon" />#}
+
 </head>
+<script>
+    let head = document.getElementById("head");
+    const link_obj = document.createElement("link");
+    link_obj.setAttribute("href", "static/favicon.ico");
+    link_obj.setAttribute("type", "image/x-icon");
+    head.appendChild(link_obj);
+</script>
 <body id="the-body">
     <form>
     <input type="text" placeholder="Enter Username" name="uname" id="Username" >

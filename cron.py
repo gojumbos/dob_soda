@@ -13,6 +13,7 @@ import constants
 
 def dob_get_new_data(date_pre, date_post, token, logger=None,
                      cols=None, write_to_disk=False,
+                     ecb=False
                      ):
 
     """ Job application filings """
@@ -24,29 +25,39 @@ def dob_get_new_data(date_pre, date_post, token, logger=None,
     f_date_pre = date_pre.strftime("%Y-%m-%d")    # earlier
     f_date_post = date_post.strftime("%Y-%m-%d")  # later
 
-    default_cols_str = constants.DEFAULT_SODA_COLS if cols is None else cols
+    default_cols_str = constants.DEFAULT_SODA_COLS if cols is None else cols  # ecb
 
-    soql1 = f'?$select={default_cols_str}&'
+    soql1 = f'?$select={default_cols_str}'
     # """ current_status_date - filing date """
     # soql2 = '$where=permit_issue_date between \'2024-06-10T00:00:00.000\' and \'2024-06-12T00:00:00.000\''  # date
-    soql2 = f'$where=current_status_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
-
     file_type = 'json'  # json
-    limit = f'&$limit={5000}'
-    url = f'https://data.cityofnewyork.us/resource/w9ak-ipjd.{file_type}' + soql1 + soql2 + limit
     headers = {'X-App-Token': token}
+    limit = f'&$limit={5000}'
+
+    if not ecb:
+        soql2 = f' &$where=current_status_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T12:00:00.000\''  # date
+        # soql2 = f' &$where=current_status_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
+        url = f'https://data.cityofnewyork.us/resource/w9ak-ipjd.{file_type}' + soql1 + soql2 + limit
+    else:
+        # soql3 = f'&$where=violation_description like \'ADVERT\'' ## here
+        soql3 = ""
+        soql2 = f'&$where=issue_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
+        # soql2 = ""
+        url = f'https://data.cityofnewyork.us/resource/6bgk-3dad.{file_type}' + soql1 + soql2 + soql3 + limit
+
 
     # task = asyncio.create_task(make_request(url=url, headers=headers))
     # r = asyncio.run(requests.get(url, headers=headers))
     r = requests.get(url, headers=headers)
     """ insert nulls """
+
     res = r.json()  # list of dicts
     col_list = default_cols_str.split(',')
     for d in col_list:
         for item in res:
             if d not in item:
                 item[d] = "NULL"
-
+    # print([x for x in res if 'ADVERT' in x['violation_description']])
     print(r.status_code)
     print(r.headers['content-type'], r.encoding)
     if write_to_disk:
@@ -56,7 +67,7 @@ def dob_get_new_data(date_pre, date_post, token, logger=None,
     return res
 
 
-def cron_run(testing=False, time_diff=1):
+def cron_run(testing=False, time_diff=1, ecb=False, write=False,):
     """ run daily cron job from api call"""
     """ service role required """
 
@@ -70,15 +81,18 @@ def cron_run(testing=False, time_diff=1):
 
     """ GET DATA - SODA """
     today = datetime.today()
-    # today = datetime.today() - timedelta(days=1)  # danger
     prev_day = datetime.now() - timedelta(days=time_diff)
     if today.weekday() == 0:  # if monday >> get friday
         prev_day = today - timedelta(days=3)
     token = constants.SODA_TOKEN
+    cols = constants.ECB_COLS if ecb else None
     # list of dicts
     soda_data_dict = dob_get_new_data(date_pre=prev_day,
                                       date_post=today,
                                       token=token,
+                                      ecb=ecb,  # 9/18
+                                      cols=cols,
+                                      write_to_disk=write
                                  )
 
     # cols = "bin,owner_s_business_name,house_no,street_name,borough,filing_date,filing_status"
@@ -146,8 +160,8 @@ def cron_run(testing=False, time_diff=1):
                     email_subject=">> HRG COPY"
                 )
 
-    return 200
+    return 200, soda_data_dict
 
 
-if __name__ == "__main__":
-    cron_run(testing=False, time_diff=3)
+# if __name__ == "__main__":
+#     cron_run(testing=True, time_diff=1, ecb=False, write=True)
