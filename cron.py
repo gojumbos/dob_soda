@@ -159,10 +159,14 @@ def cron_run(testing=False, time_diff=1, ecb=False, write=False,
                     cols=constants.AUG_24_EMAIL_COLS,
                     recipient_email="drborcich@gmail.com",
                     no_results=no_results,
-                    email_subject=f">> HRG COPY date: {today}"
+                    email_subject=f">> HRG NYCTx: {str(today.date())}"
                 )
+                # emi.send_email_html(
+                #     email_body_raw_data=str()
+                # )
     j = json.JSONEncoder()
-    return 200, str(j.encode(o=soda_data_dict,))
+    d = soda_data_dict if testing else ""
+    return 200, d
 
 
 if __name__ == "__main__":

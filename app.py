@@ -148,6 +148,15 @@ def check_log_in(access_token: str):
     app_controller.app_object.logger.warning("checklogin", code, text)
     return True if code == 200 else False
 
+@app.route('/api/soda_display_json', methods=['GET'])
+def soda_display_json():
+    """ manual endpoint for debugging
+    returns raw json output from request
+    """
+    # data = request.get_json()
+    r, data = cron.cron_run(testing=True, time_diff=1, write=False)
+    from manual import raw_json
+    return raw_json(data)
 
 
 @app.route('/api/get_favicon')  # name change?
