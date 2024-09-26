@@ -125,8 +125,7 @@ def cron_run(testing=False, time_diff=1, ecb=False, write=False,
 
     email_li_dict = service_supa_w.get_all_users()
 
-    send = True
-    if send:
+    if not testing:
         for di in email_li_dict:
             uid, email_add = di['user_id'], di['email_address']
             b = b_dict[uid] if uid in b_dict else ""
@@ -170,6 +169,6 @@ def cron_run(testing=False, time_diff=1, ecb=False, write=False,
 
 
 if __name__ == "__main__":
-    r, s = cron_run(testing=False, time_diff=1,
+    r, s = cron_run(testing=True, time_diff=1,
                     ecb=False, write=True,
                     date_minus=3)

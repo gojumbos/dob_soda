@@ -22,6 +22,7 @@ import soda
 import cron
 import constants
 
+import manual
 
 class AppController:
     def __init__(self, dev_server=False,
