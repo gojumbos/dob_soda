@@ -35,8 +35,8 @@ def dob_get_new_data(date_pre, date_post, token, logger=None,
     limit = f'&$limit={5000}'
 
     if not ecb:
-        soql2 = f' &$where=current_status_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T12:00:00.000\''  # date
-        # soql2 = f' &$where=current_status_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
+        # soql2 = f' &$where=current_status_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T12:00:00.000\''  # date
+        soql2 = f' &$where=current_status_date between \'{f_date_pre}T00:00:00.000\' and \'{f_date_post}T00:00:00.000\''  # date
         url = f'https://data.cityofnewyork.us/resource/w9ak-ipjd.{file_type}' + soql1 + soql2 + limit
     else:
         # soql3 = f'&$where=violation_description like \'ADVERT\'' ## here
@@ -61,13 +61,14 @@ def dob_get_new_data(date_pre, date_post, token, logger=None,
     print(r.status_code)
     print(r.headers['content-type'], r.encoding)
     if write_to_disk:
-        with open(f'{str(f_date_post)}.json', 'w') as f:
+        with open(f'_json/{str(f_date_post)}.json', 'w') as f:
             json.dump(r.json(), f)
 
     return res
 
 
-def cron_run(testing=False, time_diff=1, ecb=False, write=False,):
+def cron_run(testing=False, time_diff=1, ecb=False, write=False,
+             date_minus=0):
     """ run daily cron job from api call"""
     """ service role required """
 
@@ -80,8 +81,8 @@ def cron_run(testing=False, time_diff=1, ecb=False, write=False,):
               }
 
     """ GET DATA - SODA """
-    today = datetime.today()
-    prev_day = datetime.now() - timedelta(days=time_diff)
+    today = datetime.today() - timedelta(days=date_minus)
+    prev_day = today - timedelta(days=time_diff)
     if today.weekday() == 0:  # if monday >> get friday
         prev_day = today - timedelta(days=3)
     token = constants.SODA_TOKEN
@@ -149,7 +150,8 @@ def cron_run(testing=False, time_diff=1, ecb=False, write=False,):
                 email_body_raw_data=result,
                 cols=constants.AUG_24_EMAIL_COLS,
                 recipient_email=email_add,
-                no_results=no_results
+                no_results=no_results,
+                email_subject=f">> NYCTx Date: {today}"
             )
             if di['email_address'] == "holden@hrgcap.com":
                 emi.send_email_html(
@@ -157,11 +159,13 @@ def cron_run(testing=False, time_diff=1, ecb=False, write=False,):
                     cols=constants.AUG_24_EMAIL_COLS,
                     recipient_email="drborcich@gmail.com",
                     no_results=no_results,
-                    email_subject=">> HRG COPY"
+                    email_subject=f">> HRG COPY date: {today}"
                 )
     j = json.JSONEncoder()
-    return 200, j.encode(o=soda_data_dict,)
+    return 200, str(j.encode(o=soda_data_dict,))
 
 
-# if __name__ == "__main__":
-#     cron_run(testing=True, time_diff=1, ecb=False, write=True)
+if __name__ == "__main__":
+    r, s = cron_run(testing=False, time_diff=1,
+                    ecb=False, write=True,
+                    date_minus=3)

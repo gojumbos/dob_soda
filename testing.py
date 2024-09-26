@@ -10,7 +10,7 @@ from cron import cron_run
 
 
 
-r = cron_run(testing=True, time_diff=1)
+r, s = cron_run(testing=True, time_diff=1)
 load_dotenv()
 
 print(os.getenv('CRON_KEY'))
